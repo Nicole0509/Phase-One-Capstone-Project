@@ -3,12 +3,12 @@ package SuperPackage;
 public class Person {
     private String names;
     private String email;
-    private String phone;
+    private String phoneNumber;
 
-    public Person(String names, String email, String phone) {
+    public Person(String names, String email, String phoneNumber) {
         this.names = names;
         this.email = email;
-        this.phone = phone;
+        this.phoneNumber = phoneNumber;
     }
 
     public String getNames() {
@@ -27,11 +27,11 @@ public class Person {
         this.email = email;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
     }
 }
