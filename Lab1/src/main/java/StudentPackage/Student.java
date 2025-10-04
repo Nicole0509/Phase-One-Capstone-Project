@@ -31,5 +31,5 @@ public abstract class Student extends Person{
         this.address = address;
     }
 
-    public abstract double calculateGPA();
+    public abstract double calculateGPA(double[] marks);
 }

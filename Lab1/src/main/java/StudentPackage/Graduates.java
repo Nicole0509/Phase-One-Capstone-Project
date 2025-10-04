@@ -4,26 +4,34 @@ import java.util.Date;
 
 public class Graduates extends Student {
 
-    private int yearOfStudy;
+    private String underGraduateDegree;
 
-    public Graduates(String names, String email, String phoneNumber, Date dateOfBirth, String address, int yearOfStudy) {
+    public Graduates(String names, String email, String phoneNumber, Date dateOfBirth, String address, String underGraduateDegree) {
         super(names,email,phoneNumber,dateOfBirth,address);
-        this.yearOfStudy = yearOfStudy;
+        this.setUnderGraduateDegree(underGraduateDegree);
     }
 
     @Override
-    public double calculateGPA() {
+    public double calculateGPA(double[] marks) {
         return 0;
     }
 
     @Override
     public String toString() {
-        return "Student Details: \n\n" +
+        return "Graduate Student Details: \n\n" +
                 "Names: " + getNames() + "\n" +
                 "Email: " + getEmail() + "\n" +
                 "Phone Number: " + getPhoneNumber() + "\n" +
                 "Date of Birth: " + getDateOfBirth() + "\n" +
                 "Address: " + getAddress()   + "\n" +
-                "Year Of Study: " + yearOfStudy+ "\n" ;
+                "Graduate Degree Of Study: " + getUnderGraduateDegree();
+    }
+
+    public String getUnderGraduateDegree() {
+        return underGraduateDegree;
+    }
+
+    public void setUnderGraduateDegree(String underGraduateDegree) {
+        this.underGraduateDegree = underGraduateDegree;
     }
 }
