@@ -1,7 +1,15 @@
+package SuperPackage;
+
 public class Person {
     private String names;
     private String email;
     private String phone;
+
+    public Person(String names, String email, String phone) {
+        this.names = names;
+        this.email = email;
+        this.phone = phone;
+    }
 
     public String getNames() {
         return names;
