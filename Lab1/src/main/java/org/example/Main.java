@@ -26,10 +26,9 @@ public class Main {
 //        System.out.println("GPA: " + graduate.calculateGPA(marks));
 
         Instructor instructor = new Instructor("Linda","linda@gamil.com","+2507282938", "Teacher Asssistant");
-        System.out.println(instructor.getNames());
-        System.out.println(instructor.getPosition());
+        System.out.println(instructor.toString());
         instructor.setPosition("Senior Lecturer");
-        System.out.println(instructor.getPosition());
+        System.out.println(instructor.toString());
 
     }
 }

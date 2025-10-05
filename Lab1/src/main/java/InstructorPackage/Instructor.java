@@ -17,4 +17,13 @@ public class Instructor extends Person {
     public void setPosition(String position) {
         this.position = position;
     }
+
+    @Override
+    public String toString() {
+        return "Instructor Details\n\n" +
+                "Names: " + getNames() + "\n" +
+                "Email: " + getEmail() + "\n" +
+                "Phone Number: " + getPhoneNumber() + "\n" +
+                "Position/Rank: " + getPosition() + "\n";
+    }
 }
