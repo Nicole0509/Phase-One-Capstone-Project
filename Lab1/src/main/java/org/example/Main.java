@@ -1,6 +1,7 @@
 package org.example;
 
 import StudentPackage.*;
+import SuperPackage.CollectionManager;
 import models.*;
 
 import java.sql.Date;
@@ -34,12 +35,24 @@ public class Main {
         Enrollment enrollment1 = new Enrollment(graduate1,course1,Date.valueOf(LocalDate.now()),"On going",3.2);
         Enrollment enrollment2 = new Enrollment(graduate1,course2,Date.valueOf(LocalDate.now()),"On going",4.0);
 
-        System.out.println(enrollment1);
-        System.out.println(enrollment2);
+//        System.out.println(enrollment1);
+//        System.out.println(enrollment2);
 
 
         //Matching different course with their instructors
         CourseInstructor courseInstructor = new CourseInstructor(course1,instructor1,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
-        System.out.println(courseInstructor);
+//        System.out.println(courseInstructor);
+
+        CollectionManager  collectionManager = new CollectionManager();
+        System.out.println(collectionManager.addStudent(graduate1));
+        System.out.println(collectionManager.addStudent(undergraduate1));
+
+        System.out.println(collectionManager.addCourse(course1));
+        System.out.println(collectionManager.addCourse(course3));
+        System.out.println(collectionManager.addCourse(course2));
+
+        System.out.println(collectionManager.addInstructor(instructor3));
+        System.out.println(collectionManager.addInstructor(instructor1));
+        System.out.println(collectionManager.addInstructor(instructor2));
     }
 }
