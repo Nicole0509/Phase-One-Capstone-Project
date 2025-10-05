@@ -27,4 +27,14 @@ public class CollectionManager {
         instructors.add(instructor);
         return instructors + "\n";
     }
+
+    public String enrollStudent(Enrollment enrollment) {
+        enrollments.add(enrollment);
+        return enrollments + "\n";
+    }
+
+    public String addCourseInstructor(CourseInstructor courseInstructor) {
+        courseInstructors.add(courseInstructor);
+        return courseInstructors + "\n";
+    }
 }

@@ -44,15 +44,20 @@ public class Main {
 //        System.out.println(courseInstructor);
 
         CollectionManager  collectionManager = new CollectionManager();
-        System.out.println(collectionManager.addStudent(graduate1));
-        System.out.println(collectionManager.addStudent(undergraduate1));
+//        System.out.println(collectionManager.addStudent(graduate1));
+//        System.out.println(collectionManager.addStudent(undergraduate1));
+//
+//        System.out.println(collectionManager.addCourse(course1));
+//        System.out.println(collectionManager.addCourse(course3));
+//        System.out.println(collectionManager.addCourse(course2));
+//
+//        System.out.println(collectionManager.addInstructor(instructor3));
+//        System.out.println(collectionManager.addInstructor(instructor1));
+//        System.out.println(collectionManager.addInstructor(instructor2));
 
-        System.out.println(collectionManager.addCourse(course1));
-        System.out.println(collectionManager.addCourse(course3));
-        System.out.println(collectionManager.addCourse(course2));
+        System.out.println(collectionManager.addCourseInstructor(courseInstructor));
 
-        System.out.println(collectionManager.addInstructor(instructor3));
-        System.out.println(collectionManager.addInstructor(instructor1));
-        System.out.println(collectionManager.addInstructor(instructor2));
+        System.out.println(collectionManager.enrollStudent(enrollment1));
+        System.out.println(collectionManager.enrollStudent(enrollment2));
     }
 }
