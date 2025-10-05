@@ -12,23 +12,34 @@ public class Main {
 
         System.out.println("University Student Management System!");
 
-        Student undergraduate =new UnderGraduates("Ada","ADA@gamil.com","+2507282938", Date.valueOf(LocalDate.now()),"Kimironko",2);
+        //Define different courses
+        Course course1 = new Course ("MAT1", "Mathematics 1", 10);
+        Course course2 = new Course ("OOP", "OOP in Java", 15);
+        Course course3 = new Course ("CPP", "Advanced C++", 10);
 
-        Student graduate =new Graduates("Lisa","ADA@gamil.com","+2507282938", Date.valueOf(LocalDate.now()),"Kimironko","Computer Science");
+        //Define different instructors
+        Instructor instructor1 = new Instructor("Alice","alice@gamil.com","+2507242342", "Senior Lecturer");
+        Instructor instructor2 = new Instructor("Linda","linda@gamil.com","+2507829032", "Teacher Assistant");
+        Instructor instructor3 = new Instructor("Zelda","zelda@gamil.com","+2507282938", "Junior Lecturer");
 
-        Instructor instructor = new Instructor("Linda","linda@gamil.com","+2507282938", "Teacher Asssistant");
 
-        Course course = new Course ("MAT1", "Mathematics 1", 10);
+        //Defining undergraduate students
+        Student undergraduate1 =new UnderGraduates("Ada","ADA@gamil.com","+2507282938", Date.valueOf(LocalDate.now()),"Kimironko",2);
 
-        Enrollment enrollment = new Enrollment(graduate,course,Date.valueOf(LocalDate.now()),"Not completed",3.2);
-        System.out.println(enrollment);
+        //Defining graduate students
+        Student graduate1 =new Graduates("Lisa","ADA@gamil.com","+2507282938", Date.valueOf(LocalDate.now()),"Kimironko","Computer Science");
 
-        graduate.setNames("Anaya");
 
-        System.out.println(enrollment);
+        //Defining different enrollment details
+        Enrollment enrollment1 = new Enrollment(graduate1,course1,Date.valueOf(LocalDate.now()),"On going",3.2);
+        Enrollment enrollment2 = new Enrollment(graduate1,course2,Date.valueOf(LocalDate.now()),"On going",4.0);
 
-        CourseInstructor courseInstructor = new CourseInstructor(course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
+        System.out.println(enrollment1);
+        System.out.println(enrollment2);
 
+
+        //Matching different course with their instructors
+        CourseInstructor courseInstructor = new CourseInstructor(course1,instructor1,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
         System.out.println(courseInstructor);
     }
 }

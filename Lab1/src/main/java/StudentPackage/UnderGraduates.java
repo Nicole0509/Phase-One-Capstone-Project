@@ -12,10 +12,10 @@ public class UnderGraduates extends Student {
         this.setYearOfStudy(yearOfStudy);
     }
 
-//    @Override
-//    public double calculateGPA(double[] marks) {
-//        return 0;
-//    }
+    @Override
+    public double calculateGPA() {
+        return 0;
+    }
 
     @Override
     public String toString() {

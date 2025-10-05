@@ -1,6 +1,5 @@
 package models;
 
-import java.time.LocalDate;
 import java.util.Date;
 
 public class Enrollment {
@@ -8,14 +7,14 @@ public class Enrollment {
     private final Course course;
     private Date enrollmentDate;
     private String completionStatus;
-    private double gpa;
+    private double grade;
 
-    public Enrollment(Student student, Course course, Date enrollmentDate, String completionStatus, double gpa) {
+    public Enrollment(Student student, Course course, Date enrollmentDate, String completionStatus, double grade) {
         this.student = student;
         this.course = course;
         this.enrollmentDate = enrollmentDate;
         this.completionStatus = completionStatus;
-        this.gpa = gpa;
+        this.grade = grade;
     }
 
     public Date getEnrollmentDate() {
@@ -34,12 +33,12 @@ public class Enrollment {
         this.completionStatus = completionStatus;
     }
 
-    public double getGpa() {
-        return gpa;
+    public double getGrade() {
+        return grade;
     }
 
-    public void setGpa(double gpa) {
-        this.gpa = gpa;
+    public void setGrade(double grade) {
+        this.grade = grade;
     }
 
     @Override

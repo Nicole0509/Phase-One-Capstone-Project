@@ -46,6 +46,7 @@ public class CourseInstructor {
         return "\nCourse Instructor Details\n" +
                 "Instructor name: " + instructor.getNames() + "\n" +
                 "Course name: " + course.getCourseName() + "\n" +
+                "Instructor rank: " + instructor.getPosition() + "\n" +
                 "Term/Semester: " + getTerm() + "\n" +
                 "Start Date: " + getStartDate() + "\n" +
                 "End Date: " + getEndDate() ;
