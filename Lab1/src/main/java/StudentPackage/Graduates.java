@@ -13,10 +13,10 @@ public class Graduates extends Student {
         this.setUnderGraduateDegree(underGraduateDegree);
     }
 
-    @Override
-    public double calculateGPA(double[] marks) {
-        return 0;
-    }
+//    @Override
+//    public double calculateGPA(double[] marks) {
+//        return 0;
+//    }
 
     @Override
     public String toString() {

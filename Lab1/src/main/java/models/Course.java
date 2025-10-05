@@ -39,7 +39,7 @@ public class Course {
     public String toString()
     {
         return "\nCourse Details\n" +
-                "Course courseName: " + getCourseName() + "\n" +
+                "Course name: " + getCourseName() + "\n" +
                 "Course description: " + getDescription() + "\n" +
                 "Course credits: : " + getCredits() ;
     }

@@ -5,7 +5,7 @@ import SuperPackage.Person;
 import java.util.Date;
 
 
-public abstract class Student extends Person{
+public class Student extends Person{
     private Date dateOfBirth;
     private String address;
 
@@ -31,5 +31,4 @@ public abstract class Student extends Person{
         this.address = address;
     }
 
-    public abstract double calculateGPA(double[] marks);
 }
