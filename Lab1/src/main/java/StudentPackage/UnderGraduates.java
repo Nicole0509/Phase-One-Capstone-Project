@@ -1,5 +1,7 @@
 package StudentPackage;
 
+import models.Student;
+
 import java.util.Date;
 
 public class UnderGraduates extends Student {
@@ -17,7 +19,7 @@ public class UnderGraduates extends Student {
 
     @Override
     public String toString() {
-        return "UnderGraduate Student Details: \n\n" +
+        return "\nUnderGraduate Student Details: \n" +
                 "Names: " + getNames() + "\n" +
                 "Email: " + getEmail() + "\n" +
                 "Phone Number: " + getPhoneNumber() + "\n" +

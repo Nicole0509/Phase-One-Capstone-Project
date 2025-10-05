@@ -1,5 +1,7 @@
 package StudentPackage;
 
+import models.Student;
+
 import java.util.Date;
 
 public class Graduates extends Student {
@@ -18,7 +20,7 @@ public class Graduates extends Student {
 
     @Override
     public String toString() {
-        return "Graduate Student Details: \n\n" +
+        return "\nGraduate Student Details: \n" +
                 "Names: " + getNames() + "\n" +
                 "Email: " + getEmail() + "\n" +
                 "Phone Number: " + getPhoneNumber() + "\n" +

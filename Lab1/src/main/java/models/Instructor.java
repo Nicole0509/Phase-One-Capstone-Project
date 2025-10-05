@@ -1,4 +1,4 @@
-package InstructorPackage;
+package models;
 
 import SuperPackage.Person;
 
@@ -20,10 +20,10 @@ public class Instructor extends Person {
 
     @Override
     public String toString() {
-        return "Instructor Details\n\n" +
+        return "\nInstructor Details\n" +
                 "Names: " + getNames() + "\n" +
                 "Email: " + getEmail() + "\n" +
                 "Phone Number: " + getPhoneNumber() + "\n" +
-                "Position/Rank: " + getPosition() + "\n";
+                "Position/Rank: " + getPosition();
     }
 }

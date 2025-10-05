@@ -1,4 +1,4 @@
-package StudentPackage;
+package models;
 
 import SuperPackage.Person;
 
