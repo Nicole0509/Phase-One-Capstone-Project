@@ -27,5 +27,8 @@ public class Main {
 
         System.out.println(enrollment);
 
+        CourseInstructor courseInstructor = new CourseInstructor(course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
+
+        System.out.println(courseInstructor);
     }
 }
