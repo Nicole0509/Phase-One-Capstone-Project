@@ -3,6 +3,7 @@ package models;
 import SuperPackage.Person;
 
 import java.util.Date;
+import java.util.Set;
 
 import SuperPackage.CollectionManager;
 
@@ -10,9 +11,6 @@ import SuperPackage.CollectionManager;
 public class Student extends Person{
     private Date dateOfBirth;
     private String address;
-    private double gpa;
-
-    CollectionManager manager = new CollectionManager();
 
     public Student(String names, String email, String phoneNumber, Date dateOfBirth, String address) {
         super(names, email, phoneNumber);
@@ -36,16 +34,25 @@ public class Student extends Person{
         this.address = address;
     }
 
-    public double getGpa() {
-        return gpa;
+    public double calculateGPA(CollectionManager manager) {
+        Set<Enrollment> enrollments = manager.getStudentEnrollments(this);
+
+        if(enrollments.isEmpty()) return 0;
+
+        double sumOfPoints = 0;
+
+        for (Enrollment enrollment : enrollments){
+            sumOfPoints += convertGradeToGPA(enrollment.getGrade());
+        }
+        return sumOfPoints/enrollments.size();
     }
 
-    public void setGpa(double gpa) {
-        this.gpa = gpa;
-    }
-
-
-    public double calculateGPA(){
-        return 0;
+    public double convertGradeToGPA(double grade) {
+        if (grade >= 90) return 4.0;
+        else if (grade >= 80) return 3.5;
+        else if (grade >= 70) return 3.0;
+        else if (grade >= 60) return 2.5;
+        else if (grade >= 50) return 2.0;
+        else return 0.0;
     }
 }

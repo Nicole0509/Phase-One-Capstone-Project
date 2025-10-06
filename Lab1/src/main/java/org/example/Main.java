@@ -64,5 +64,8 @@ public class Main {
         collectionManager.enrollStudent(enrollment2);
         collectionManager.enrollStudent(new Enrollment(undergraduate1,course2,Date.valueOf(LocalDate.now()),"On going",92));
         System.out.println(collectionManager.getStudentEnrollments(undergraduate1));
+
+        System.out.println("Student: " + graduate1.getNames()+ " got a GPA of " +graduate1.calculateGPA(collectionManager));
+        System.out.println("Student: " + undergraduate1.getNames()+ " got a GPA of " +undergraduate1.calculateGPA(collectionManager));
     }
 }

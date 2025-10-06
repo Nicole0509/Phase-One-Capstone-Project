@@ -1,5 +1,6 @@
 package StudentPackage;
 
+import SuperPackage.CollectionManager;
 import models.Student;
 
 import java.util.Date;
@@ -13,8 +14,8 @@ public class UnderGraduates extends Student {
     }
 
     @Override
-    public double calculateGPA() {
-        return 0;
+    public double calculateGPA(CollectionManager manager) {
+        return super.calculateGPA(manager);
     }
 
     @Override
