@@ -8,7 +8,7 @@ import java.util.Set;
 import SuperPackage.CollectionManager;
 
 
-public class Student extends Person{
+public abstract class Student extends Person{
     private Date dateOfBirth;
     private String address;
 
@@ -55,4 +55,6 @@ public class Student extends Person{
         else if (grade >= 50) return 2.0;
         else return 0.0;
     }
+
+    public abstract boolean isFullTime(CollectionManager manager);
 }

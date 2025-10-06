@@ -1,9 +1,11 @@
 package StudentPackage;
 
 import SuperPackage.CollectionManager;
+import models.Enrollment;
 import models.Student;
 
 import java.util.Date;
+import java.util.Set;
 
 public class Graduates extends Student {
 
@@ -14,9 +16,12 @@ public class Graduates extends Student {
         this.setUnderGraduateDegree(underGraduateDegree);
     }
 
-    @Override
-    public double calculateGPA(CollectionManager manager) {
-        return super.calculateGPA(manager) + 0.3; //Adding a 0.3 for the thesis
+    public String getUnderGraduateDegree() {
+        return underGraduateDegree;
+    }
+
+    public void setUnderGraduateDegree(String underGraduateDegree) {
+        this.underGraduateDegree = underGraduateDegree;
     }
 
     @Override
@@ -30,11 +35,23 @@ public class Graduates extends Student {
                 "Graduate Degree Of Study: " + getUnderGraduateDegree();
     }
 
-    public String getUnderGraduateDegree() {
-        return underGraduateDegree;
+    @Override
+    public double calculateGPA(CollectionManager manager) {
+        return super.calculateGPA(manager) + 0.3; //Adding a 0.3 for the thesis
     }
 
-    public void setUnderGraduateDegree(String underGraduateDegree) {
-        this.underGraduateDegree = underGraduateDegree;
+    public boolean isFullTime(CollectionManager manager){
+        Set<Enrollment> enrollments = manager.getStudentEnrollments(this);
+
+        if(enrollments.isEmpty()) return false;
+
+        double credits = 0;
+        for(Enrollment enrollment : enrollments){
+            credits += enrollment.getCourse().getCredits();
+        }
+
+        System.out.println("Number of Credits: " + credits);
+        if(credits >= 12) return true;
+         else return false;
     }
 }

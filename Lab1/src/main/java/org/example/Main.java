@@ -90,5 +90,10 @@ public class Main {
 
         System.out.println(collectionManager.getCoursesInstructed(course1));
 
+        // Check if a student is Full Time
+        System.out.println("Is " + graduate1.getNames() + " a full time student? " + graduate1.isFullTime(collectionManager));
+        System.out.println("Is " + undergraduate1.getNames() + " a full time student? " + undergraduate1.isFullTime(collectionManager));
+
+
     }
 }

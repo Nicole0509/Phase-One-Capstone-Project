@@ -1,9 +1,11 @@
 package StudentPackage;
 
 import SuperPackage.CollectionManager;
+import models.Enrollment;
 import models.Student;
 
 import java.util.Date;
+import java.util.Set;
 
 public class UnderGraduates extends Student {
     private int yearOfStudy;
@@ -13,9 +15,12 @@ public class UnderGraduates extends Student {
         this.setYearOfStudy(yearOfStudy);
     }
 
-    @Override
-    public double calculateGPA(CollectionManager manager) {
-        return super.calculateGPA(manager);
+    public int getYearOfStudy() {
+        return yearOfStudy;
+    }
+
+    public void setYearOfStudy(int yearOfStudy) {
+        this.yearOfStudy = yearOfStudy;
     }
 
     @Override
@@ -29,11 +34,24 @@ public class UnderGraduates extends Student {
                 "Year Of Study: " + getYearOfStudy();
     }
 
-    public int getYearOfStudy() {
-        return yearOfStudy;
+    @Override
+    public double calculateGPA(CollectionManager manager) {
+        return super.calculateGPA(manager);
     }
 
-    public void setYearOfStudy(int yearOfStudy) {
-        this.yearOfStudy = yearOfStudy;
+    @Override
+    public boolean isFullTime(CollectionManager manager){
+        Set<Enrollment> enrollments = manager.getStudentEnrollments(this);
+
+        if(enrollments.isEmpty()) return false;
+
+        double credits = 0;
+        for(Enrollment enrollment : enrollments){
+            credits += enrollment.getCourse().getCredits();
+        }
+
+        System.out.println("Number of Credits: " + credits);
+        if(credits >= 8) return true;
+        else return false;
     }
 }
