@@ -84,7 +84,7 @@ public class Main {
         collectionManager.addCourseInstructor(courseInstructor1);
         collectionManager.addCourseInstructor(courseInstructor2);
         collectionManager.addCourseInstructor(courseInstructor3);
-//        System.out.println(collectionManager.getCourseInstructors(instructor1));
+        System.out.println(collectionManager.getCourseInstructors(instructor1));
 
         //Getting all instructors that teach a particular course
 

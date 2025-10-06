@@ -2,8 +2,10 @@ package SuperPackage;
 
 import models.*;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class CollectionManager {
@@ -13,6 +15,12 @@ public class CollectionManager {
 
     public final Set<Enrollment> enrollments  = new HashSet<>();
     public final Set<CourseInstructor> courseInstructors  = new HashSet<>();
+
+    public <T>Set<T> filterSet (Collection<T> collection, Predicate<T> predicate) {
+        return collection.stream()
+                .filter(predicate)
+                .collect(Collectors.toSet());
+    }
 
     public String addStudent(Student student) {
         students.add(student);
@@ -38,20 +46,14 @@ public class CollectionManager {
     }
 
     public Set<Enrollment> getStudentEnrollments(Student student) {
-        return enrollments.stream()
-                .filter(e -> e.getStudent().equals(student))
-                .collect(Collectors.toSet());
+        return filterSet(enrollments, e -> e.getStudent().equals(student));
     }
 
     public Set<CourseInstructor> getCourseInstructors(Instructor instructor) {
-        return courseInstructors.stream()
-                .filter(i -> i.getInstructor().equals(instructor))
-                .collect(Collectors.toSet());
+          return filterSet(courseInstructors,i -> i.getInstructor().equals(instructor) );
     }
 
     public Set<CourseInstructor> getCoursesInstructed(Course course) {
-        return courseInstructors.stream()
-                .filter(c -> c.getCourse().equals(course))
-                .collect(Collectors.toSet());
+        return filterSet(courseInstructors,c -> c.getCourse().equals(course));
     }
 }
