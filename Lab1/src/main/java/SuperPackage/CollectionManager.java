@@ -29,14 +29,12 @@ public class CollectionManager {
         return instructors + "\n";
     }
 
-    public String enrollStudent(Enrollment enrollment) {
+    public void enrollStudent(Enrollment enrollment) {
         enrollments.add(enrollment);
-        return enrollments + "\n";
     }
 
-    public String addCourseInstructor(CourseInstructor courseInstructor) {
+    public void addCourseInstructor(CourseInstructor courseInstructor) {
         courseInstructors.add(courseInstructor);
-        return courseInstructors + "\n";
     }
 
     public Set<Enrollment> getStudentEnrollments(Student student) {
@@ -48,6 +46,12 @@ public class CollectionManager {
     public Set<CourseInstructor> getCourseInstructors(Instructor instructor) {
         return courseInstructors.stream()
                 .filter(i -> i.getInstructor().equals(instructor))
+                .collect(Collectors.toSet());
+    }
+
+    public Set<CourseInstructor> getCoursesInstructed(Course course) {
+        return courseInstructors.stream()
+                .filter(c -> c.getCourse().equals(course))
                 .collect(Collectors.toSet());
     }
 }

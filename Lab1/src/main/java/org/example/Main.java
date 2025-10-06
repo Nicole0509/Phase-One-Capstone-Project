@@ -42,42 +42,53 @@ public class Main {
         //Matching different course with their instructors
         CourseInstructor courseInstructor1 = new CourseInstructor(course1,instructor1,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
         CourseInstructor courseInstructor2 = new CourseInstructor(course2,instructor1,2,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
+        CourseInstructor courseInstructor3 = new CourseInstructor(course1,instructor3,2,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
 
-        System.out.println(courseInstructor1);
+
+//        System.out.println(courseInstructor1);
 
         CollectionManager  collectionManager = new CollectionManager();
 
         // Adding a new student in the Student Set
-        System.out.println(collectionManager.addStudent(graduate1));
-        System.out.println(collectionManager.addStudent(undergraduate1));
+
+//        System.out.println(collectionManager.addStudent(graduate1));
+//        System.out.println(collectionManager.addStudent(undergraduate1));
 
         // Adding a new course in the course Set
-        System.out.println(collectionManager.addCourse(course1));
-        System.out.println(collectionManager.addCourse(course3));
-        System.out.println(collectionManager.addCourse(course2));
+
+//        System.out.println(collectionManager.addCourse(course1));
+//        System.out.println(collectionManager.addCourse(course3));
+//        System.out.println(collectionManager.addCourse(course2));
 
         // Adding a new instructor in the instructor Set
-        System.out.println(collectionManager.addInstructor(instructor3));
-        System.out.println(collectionManager.addInstructor(instructor1));
-        System.out.println(collectionManager.addInstructor(instructor2));
+
+//        System.out.println(collectionManager.addInstructor(instructor3));
+//        System.out.println(collectionManager.addInstructor(instructor1));
+//        System.out.println(collectionManager.addInstructor(instructor2));
 
 
         //Getting all courses a particular student is enrolled in
 
-        collectionManager.enrollStudent(enrollment1);
-        collectionManager.enrollStudent(enrollment2);
-        collectionManager.enrollStudent(new Enrollment(undergraduate1,course2,Date.valueOf(LocalDate.now()),"On going",92));
-        System.out.println(collectionManager.getStudentEnrollments(undergraduate1));
+//        collectionManager.enrollStudent(enrollment1);
+//        collectionManager.enrollStudent(enrollment2);
+//        collectionManager.enrollStudent(new Enrollment(undergraduate1,course2,Date.valueOf(LocalDate.now()),"On going",92));
+//        System.out.println(collectionManager.getStudentEnrollments(undergraduate1));
 
         //Getting the GPA of 2 different students
 
-        System.out.println("Student: " + graduate1.getNames()+ " got a GPA of " +graduate1.calculateGPA(collectionManager));
-        System.out.println("Student: " + undergraduate1.getNames()+ " got a GPA of " +undergraduate1.calculateGPA(collectionManager));
+//        System.out.println("Student: " + graduate1.getNames()+ " got a GPA of " +graduate1.calculateGPA(collectionManager));
+//        System.out.println("Student: " + undergraduate1.getNames()+ " got a GPA of " +undergraduate1.calculateGPA(collectionManager));
 
         //Getting all courses a particular instructor teaches
 
         collectionManager.addCourseInstructor(courseInstructor1);
         collectionManager.addCourseInstructor(courseInstructor2);
-        System.out.println(collectionManager.getCourseInstructors(instructor1));
+        collectionManager.addCourseInstructor(courseInstructor3);
+//        System.out.println(collectionManager.getCourseInstructors(instructor1));
+
+        //Getting all instructors that teach a particular course
+
+        System.out.println(collectionManager.getCoursesInstructed(course1));
+
     }
 }
