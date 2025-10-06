@@ -44,11 +44,19 @@ public class CourseInstructor {
     @Override
     public String toString() {
         return "\nCourse Instructor Details\n" +
-                "Instructor name: " + instructor.getNames() + "\n" +
-                "Course name: " + course.getCourseName() + "\n" +
-                "Instructor rank: " + instructor.getPosition() + "\n" +
+                "Instructor name: " + getInstructor().getNames() + "\n" +
+                "Course name: " + getCourse().getCourseName() + "\n" +
+                "Instructor rank: " + getInstructor().getPosition() + "\n" +
                 "Term/Semester: " + getTerm() + "\n" +
                 "Start Date: " + getStartDate() + "\n" +
                 "End Date: " + getEndDate() ;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
     }
 }

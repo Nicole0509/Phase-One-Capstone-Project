@@ -44,4 +44,10 @@ public class CollectionManager {
                 .filter(e -> e.getStudent().equals(student))
                 .collect(Collectors.toSet());
     }
+
+    public Set<CourseInstructor> getCourseInstructors(Instructor instructor) {
+        return courseInstructors.stream()
+                .filter(i -> i.getInstructor().equals(instructor))
+                .collect(Collectors.toSet());
+    }
 }
