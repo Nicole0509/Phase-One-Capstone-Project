@@ -4,14 +4,15 @@ import models.*;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class CollectionManager {
     private final Set<Student> students = new HashSet<>();
     private final Set<Course> courses = new HashSet<>();
     private final Set<Instructor> instructors  = new HashSet<>();
 
-    private final Set<Enrollment> enrollments  = new HashSet<>();
-    private final Set<CourseInstructor> courseInstructors  = new HashSet<>();
+    public final Set<Enrollment> enrollments  = new HashSet<>();
+    public final Set<CourseInstructor> courseInstructors  = new HashSet<>();
 
     public String addStudent(Student student) {
         students.add(student);
@@ -36,5 +37,11 @@ public class CollectionManager {
     public String addCourseInstructor(CourseInstructor courseInstructor) {
         courseInstructors.add(courseInstructor);
         return courseInstructors + "\n";
+    }
+
+    public Set<Enrollment> getStudentEnrollments(Student student) {
+        return enrollments.stream()
+                .filter(e -> e.getStudent().equals(student))
+                .collect(Collectors.toSet());
     }
 }

@@ -2,17 +2,17 @@ package models;
 
 import SuperPackage.Person;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
+
+import SuperPackage.CollectionManager;
 
 
 public class Student extends Person{
     private Date dateOfBirth;
     private String address;
-
-    private List<Enrollment> enrollments = new ArrayList<>();
     private double gpa;
+
+    CollectionManager manager = new CollectionManager();
 
     public Student(String names, String email, String phoneNumber, Date dateOfBirth, String address) {
         super(names, email, phoneNumber);
@@ -34,14 +34,6 @@ public class Student extends Person{
 
     public void setAddress(String address) {
         this.address = address;
-    }
-
-    public List<Enrollment> getEnrollments() {
-        return enrollments;
-    }
-
-    public void setEnrollments(List<Enrollment> enrollments) {
-        this.enrollments = enrollments;
     }
 
     public double getGpa() {

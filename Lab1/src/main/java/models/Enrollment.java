@@ -45,9 +45,17 @@ public class Enrollment {
     public String toString()
     {
             return "\nEnrollment Details\n" +
-                "Student name: " + student.getNames() + "\n" +
-                "Course name: " + course.getCourseName() + "\n" +
+                "Student name: " + getStudent().getNames() + "\n" +
+                "Course name: " + getCourse().getCourseName() + "\n" +
                 "Enrollment: " + getEnrollmentDate() + "\n" +
                 "Completion Status: " + getCompletionStatus() ;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public Course getCourse() {
+        return course;
     }
 }

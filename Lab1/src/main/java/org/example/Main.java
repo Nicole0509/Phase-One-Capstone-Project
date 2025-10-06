@@ -32,8 +32,8 @@ public class Main {
 
 
         //Defining different enrollment details
-        Enrollment enrollment1 = new Enrollment(graduate1,course1,Date.valueOf(LocalDate.now()),"On going",3.2);
-        Enrollment enrollment2 = new Enrollment(graduate1,course2,Date.valueOf(LocalDate.now()),"On going",4.0);
+        Enrollment enrollment1 = new Enrollment(graduate1,course1,Date.valueOf(LocalDate.now()),"On going",74);
+        Enrollment enrollment2 = new Enrollment(graduate1,course2,Date.valueOf(LocalDate.now()),"On going",92);
 
 //        System.out.println(enrollment1);
 //        System.out.println(enrollment2);
@@ -55,9 +55,14 @@ public class Main {
 //        System.out.println(collectionManager.addInstructor(instructor1));
 //        System.out.println(collectionManager.addInstructor(instructor2));
 
-        System.out.println(collectionManager.addCourseInstructor(courseInstructor));
+//        System.out.println(collectionManager.addCourseInstructor(courseInstructor));
+//
+//        System.out.println(collectionManager.enrollStudent(enrollment1));
+//        System.out.println(collectionManager.enrollStudent(enrollment2));
 
-        System.out.println(collectionManager.enrollStudent(enrollment1));
-        System.out.println(collectionManager.enrollStudent(enrollment2));
+        collectionManager.enrollStudent(enrollment1);
+        collectionManager.enrollStudent(enrollment2);
+        collectionManager.enrollStudent(new Enrollment(undergraduate1,course2,Date.valueOf(LocalDate.now()),"On going",92));
+        System.out.println(collectionManager.getStudentEnrollments(undergraduate1));
     }
 }
