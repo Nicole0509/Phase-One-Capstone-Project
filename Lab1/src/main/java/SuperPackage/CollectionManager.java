@@ -16,33 +16,34 @@ public class CollectionManager {
     public final Set<Enrollment> enrollments  = new HashSet<>();
     public final Set<CourseInstructor> courseInstructors  = new HashSet<>();
 
+    public <T>void addEntity (Collection<T> collection, T entity) {
+        collection.add(entity);
+    }
+
     public <T>Set<T> filterSet (Collection<T> collection, Predicate<T> predicate) {
         return collection.stream()
                 .filter(predicate)
                 .collect(Collectors.toSet());
     }
 
-    public String addStudent(Student student) {
-        students.add(student);
-        return students + "\n";
+    public void addStudent(Student student) {
+        addEntity(students, student);
     }
 
-    public String addCourse(Course course) {
-        courses.add(course);
-        return courses + "\n";
+    public void addCourse(Course course) {
+        addEntity(courses, course);
     }
 
-    public String addInstructor(Instructor instructor) {
-        instructors.add(instructor);
-        return instructors + "\n";
+    public void addInstructor(Instructor instructor) {
+        addEntity(instructors, instructor);
     }
 
     public void enrollStudent(Enrollment enrollment) {
-        enrollments.add(enrollment);
+        addEntity(enrollments, enrollment);
     }
 
     public void addCourseInstructor(CourseInstructor courseInstructor) {
-        courseInstructors.add(courseInstructor);
+        addEntity(courseInstructors, courseInstructor);
     }
 
     public Set<Enrollment> getStudentEnrollments(Student student) {

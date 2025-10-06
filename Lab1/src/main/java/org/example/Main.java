@@ -51,28 +51,28 @@ public class Main {
 
         // Adding a new student in the Student Set
 
-//        System.out.println(collectionManager.addStudent(graduate1));
-//        System.out.println(collectionManager.addStudent(undergraduate1));
+        collectionManager.addStudent(graduate1);
+        collectionManager.addStudent(undergraduate1);
 
         // Adding a new course in the course Set
 
-//        System.out.println(collectionManager.addCourse(course1));
-//        System.out.println(collectionManager.addCourse(course3));
-//        System.out.println(collectionManager.addCourse(course2));
+        collectionManager.addCourse(course1);
+        collectionManager.addCourse(course3);
+        collectionManager.addCourse(course2);
 
         // Adding a new instructor in the instructor Set
 
-//        System.out.println(collectionManager.addInstructor(instructor3));
-//        System.out.println(collectionManager.addInstructor(instructor1));
-//        System.out.println(collectionManager.addInstructor(instructor2));
+        collectionManager.addInstructor(instructor3);
+        collectionManager.addInstructor(instructor1);
+        collectionManager.addInstructor(instructor2);
 
 
         //Getting all courses a particular student is enrolled in
 
-//        collectionManager.enrollStudent(enrollment1);
-//        collectionManager.enrollStudent(enrollment2);
-//        collectionManager.enrollStudent(new Enrollment(undergraduate1,course2,Date.valueOf(LocalDate.now()),"On going",92));
-//        System.out.println(collectionManager.getStudentEnrollments(undergraduate1));
+        collectionManager.enrollStudent(enrollment1);
+        collectionManager.enrollStudent(enrollment2);
+        collectionManager.enrollStudent(new Enrollment(undergraduate1,course2,Date.valueOf(LocalDate.now()),"On going",92));
+        System.out.println(collectionManager.getStudentEnrollments(undergraduate1));
 
         //Getting the GPA of 2 different students
 
