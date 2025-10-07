@@ -10,17 +10,38 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
-public class StudentImplemenatation extends Student implements CrudInterface {
+public class StudentImplementation extends Student implements CrudInterface {
     private final Connection connection;
     String query;
 
-    public StudentImplemenatation(Connection connection, String names, String email, String phoneNumber, Date dateOfBirth, String address) {
+    public StudentImplementation(Connection connection, String names, String email, String phoneNumber, Date dateOfBirth, String address) {
         super(names, email, phoneNumber, dateOfBirth, address);
         this.connection = connection;
     }
 
     @Override
     public String create(){
+        // Validating inputs
+        if (getNames() == null || getNames().isBlank()) {
+            return "Validation failed: 'names' cannot be empty.";
+        }
+
+        if (getEmail() == null || !getEmail().matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
+            return "Validation failed: Invalid email format.";
+        }
+
+        if (getPhoneNumber() == null || !getPhoneNumber().matches("^\\+?[0-9]{7,15}$")) {
+            return "Validation failed: Invalid phone number.";
+        }
+
+        if (getDateOfBirth() == null) {
+            return "Validation failed: Date of birth cannot be null.";
+        }
+
+        if (getAddress() == null || getAddress().isBlank()) {
+            return "Validation failed: Address cannot be empty.";
+        }
+
 
         //Checking if there's no duplicate emails
         String checkQuery = "SELECT COUNT(*) FROM students WHERE email = ?";

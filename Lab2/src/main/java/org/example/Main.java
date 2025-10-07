@@ -1,6 +1,6 @@
 package org.example;
 
-import CRUD_Implemantation.StudentImplemenatation;
+import CRUD_Implemantation.StudentImplementation;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -21,7 +21,7 @@ public class Main {
         if (connection != null) {
 //            Database connection established
 
-            StudentImplemenatation student =new StudentImplemenatation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
+            StudentImplementation student =new StudentImplementation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
 
             System.out.println(student.create());
 
