@@ -22,7 +22,29 @@ public class StudentImplemenatation extends Student implements CrudInterface {
     @Override
     public String create(){
 
-        query = "INSERT INTO students (names, email, phone_number, date_of_birth, address) VALUES (?, ?, ?, ?, ?)";
+        //Checking if there's no duplicate emails
+        String checkQuery = "SELECT COUNT(*) FROM students WHERE email = ?";
+
+        try (PreparedStatement checkStatement = connection.prepareStatement(checkQuery)) {
+
+            checkStatement.setString(1, getEmail());
+            ResultSet rs = checkStatement.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                return "A student with this email already exists";
+            }
+            rs.close();
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+
+        //Creating a student record in the DB
+        query = """
+        INSERT INTO students (names, email, phone_number, date_of_birth, address)
+        VALUES (?, ?, ?, ?, ?)
+        """;
 
         try(PreparedStatement statement = connection.prepareStatement(query)){
 
