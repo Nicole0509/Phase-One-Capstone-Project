@@ -92,29 +92,53 @@ public class StudentImplementation extends Student implements CrudInterface {
     }
 
     @Override
-    public void viewAll(){
+    public String viewAll(){
         String query = "SELECT * FROM students";
 
         try(PreparedStatement statement = connection.prepareStatement(query)){
             ResultSet resultSet = statement.executeQuery();
+
             while(resultSet.next()){
                 int id = resultSet.getInt("id");
+
+                //Getting values from the DB
                 setNames(resultSet.getString("names"));
                 setEmail(resultSet.getString("email"));
                 setPhoneNumber(resultSet.getString("phone_number"));
                 setDateOfBirth(resultSet.getDate("date_of_birth"));
                 setAddress(resultSet.getString("address"));
 
-                System.out.println("ID: " + id + " \t Names : " + getNames() + "\t Email: " + getPhoneNumber() + "\t Date of Birth: " + getDateOfBirth() + "\t Address : " + getAddress());
+                return "ID: " + id +
+                        " \t Names : " + getNames() +
+                        "\t Email: " + getPhoneNumber() +
+                        "\t Date of Birth: " + getDateOfBirth() +
+                        "\t Address : " + getAddress();
             }
 
         } catch (Exception e){
-            e.printStackTrace();
+            return  e.getMessage();
         }
+        return null;
     }
 
     @Override
-    public void update(int id){
+    public String update(int id){
+        // Check if a particular exists
+        String selectQuery = "SELECT * FROM students WHERE id = ?";
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
+
+            selectStatement.setInt(1, id);
+            ResultSet rs = selectStatement.executeQuery();
+
+            if (!rs.next()) {
+                return "No student found with ID " + id;
+            }
+
+        } catch (Exception e){
+            return e.getMessage();
+        }
+
+        // Update an existing record in students
         System.out.println("Update student");
         query = """
                 UPDATE students SET 
@@ -141,7 +165,7 @@ public class StudentImplementation extends Student implements CrudInterface {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-
+        return null;
     }
 
     @Override
