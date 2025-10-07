@@ -25,8 +25,10 @@ public class Main {
 //            StudentImplementation student =new StudentImplementation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
 //            student.viewAll();
 
-            CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
-            System.out.println(course.delete(32));
+//            CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
+//            System.out.println(course.delete(32));
+
+            InstructorImplementation instructor = new InstructorImplementation(connection,"Alice","alice@gamil.com","+2507242342", "Senior Lecturer");
 
             connection.close();
 
