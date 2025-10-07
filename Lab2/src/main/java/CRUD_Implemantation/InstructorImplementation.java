@@ -104,7 +104,32 @@ public class InstructorImplementation extends Instructor implements CrudInterfac
 
     @Override
     public void viewAll(){
+        String query = "SELECT * FROM instructors";
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+
+                //Getting values from the DB
+                setNames(resultSet.getString("names"));
+                setEmail(resultSet.getString("email"));
+                setPhoneNumber(resultSet.getString("phone_number"));
+                setPosition(resultSet.getString("position"));
+
+                System.out.println( "ID: " + id +
+                        " \t Names : " + getNames() +
+                        "\t Email: " + getPhoneNumber() +
+                        "\t Position/Rank : " + getPosition()
+                );
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
+
 
     @Override
     public String update(int id){
