@@ -93,6 +93,16 @@ public class StudentImplemenatation extends Student implements CrudInterface {
 
     @Override
     public void delete(int id){
+        query = """
+                DELETE FROM students WHERE id = ?
+        """;
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
