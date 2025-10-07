@@ -6,9 +6,9 @@ import models.Student;
 
 import java.util.Date;
 
-public class UserImplemenatation extends Student implements CrudInterface {
+public class StudentImplemenatation extends Student implements CrudInterface {
 
-    public UserImplemenatation(String names, String email, String phoneNumber, Date dateOfBirth, String address) {
+    public StudentImplemenatation(String names, String email, String phoneNumber, Date dateOfBirth, String address) {
         super(names, email, phoneNumber, dateOfBirth, address);
     }
 

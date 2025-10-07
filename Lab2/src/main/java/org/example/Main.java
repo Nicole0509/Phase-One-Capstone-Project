@@ -1,22 +1,24 @@
 package org.example;
 
-import StudentPackage.Graduates;
-import models.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-import java.sql.Date;
-import java.time.LocalDate;
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
 
-        System.out.println("University Student Management System");
-        Student graduate1 =new Graduates("Lisa","ADA@gamil.com","+2507282938", Date.valueOf(LocalDate.now()),"Kimironko","Computer Science");
+    private static final String URL = System.getenv("DB_URL");
+    private static final String USERNAME = System.getenv("DB_USERNAME");
+    private static final String PASSWORD = System.getenv("DB_PASSWORD");
 
-        System.out.println(graduate1);
-        graduate1.setNames("Chantal");
-        graduate1.setEmail("chantal@gamil.com");
-        System.out.println(graduate1);
+    public static void main(String[] args) throws SQLException {
+
+        Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+
+        if (connection != null) {
+            System.out.println("Database connection established");
+        } else  {
+            System.out.println("Database connection could not be established");
+        }
+
     }
 }
