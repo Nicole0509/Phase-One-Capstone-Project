@@ -1,14 +1,10 @@
 package org.example;
 
-import CRUD_Implemantation.CourseImplementation;
-import CRUD_Implemantation.StudentImplementation;
-import models.Course;
+import CRUD_Implemantation.*;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.time.LocalDate;
 
 public class Main {
 
@@ -26,8 +22,8 @@ public class Main {
 //            StudentImplementation student =new StudentImplementation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
 //            System.out.println(student.update(6));
 
-            Course course1 = new CourseImplementation(connection,"MAT1", "Mathematics 1", 10);
-
+            CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
+            System.out.println(course.create());
 
             connection.close();
 

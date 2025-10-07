@@ -3,9 +3,9 @@ package models;
 public class Course {
     private String courseName;
     private String description;
-    private double credits;
+    private int credits;
 
-    public Course(String courseName, String description, double credits) {
+    public Course(String courseName, String description, int credits) {
         this.setCourseName(courseName);
         this.setDescription(description);
         this.setCredits(credits);
@@ -27,11 +27,11 @@ public class Course {
         this.description = description;
     }
 
-    public double getCredits() {
+    public int getCredits() {
         return credits;
     }
 
-    public void setCredits(double credits) {
+    public void setCredits(int credits) {
         this.credits = credits;
     }
 
