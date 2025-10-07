@@ -20,13 +20,13 @@ public class Main {
 
         if (connection != null) {
 //            Database connection established
-            
+
 
 //            StudentImplementation student =new StudentImplementation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
 //            student.viewAll();
 
             CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
-            course.viewAll();
+            System.out.println(course.update(2));
 
             connection.close();
 
