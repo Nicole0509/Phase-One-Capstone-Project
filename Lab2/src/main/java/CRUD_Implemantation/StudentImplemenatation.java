@@ -6,6 +6,7 @@ import models.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
 
@@ -39,7 +40,24 @@ public class StudentImplemenatation extends Student implements CrudInterface {
 
     @Override
     public void viewAll(){
-        System.out.println("View all students");
+        String query = "SELECT * FROM students";
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+                setNames(resultSet.getString("names"));
+                setEmail(resultSet.getString("email"));
+                setPhoneNumber(resultSet.getString("phone_number"));
+                setDateOfBirth(resultSet.getDate("date_of_birth"));
+                setAddress(resultSet.getString("address"));
+
+                System.out.println("ID: " + id + " \t Names : " + getNames() + "\t Email: " + getPhoneNumber() + "\t Date of Birth: " + getDateOfBirth() + "\t Address : " + getAddress());
+            }
+
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -75,11 +93,10 @@ public class StudentImplemenatation extends Student implements CrudInterface {
 
     @Override
     public void delete(int id){
-        System.out.println("Delete student");
     }
 
     @Override
     public boolean isFullTime(CollectionManager collectionManager) {
-        return false;
+        return true;
     }
 }

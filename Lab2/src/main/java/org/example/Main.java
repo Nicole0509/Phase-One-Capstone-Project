@@ -21,9 +21,9 @@ public class Main {
         if (connection != null) {
 //            Database connection established
 
-            StudentImplemenatation student =new StudentImplemenatation(connection,"Angela","angela@gamil.com","+2507282098", Date.valueOf(LocalDate.now()),"Kimironko");
+            StudentImplemenatation student =new StudentImplemenatation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
 
-            student.update(3);
+            student.viewAll();
 
 
             connection.close();
