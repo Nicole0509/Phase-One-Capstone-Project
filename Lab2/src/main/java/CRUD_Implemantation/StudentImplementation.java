@@ -123,20 +123,52 @@ public class StudentImplementation extends Student implements CrudInterface {
 
     @Override
     public String update(int id){
+
+        // Variables that will be used to get user in put
+        String newNames = null;
+        String newEmail = null;
+        String newPhone = null;
+        Date newDob = null;
+        String newAddress = null;
+
         // Check if a particular exists
         String selectQuery = "SELECT * FROM students WHERE id = ?";
+
         try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
 
             selectStatement.setInt(1, id);
-            ResultSet rs = selectStatement.executeQuery();
+            ResultSet resultSet = selectStatement.executeQuery();
 
-            if (!rs.next()) {
+            if (!resultSet.next()) {
                 return "No student found with ID " + id;
             }
+
+            //Setting new update values
+            setNames(newNames);
+            setEmail(newEmail);
+            setPhoneNumber(newPhone);
+            setDateOfBirth(newDob);
+            setAddress(newAddress);
+
+            //Getting values from the DB
+            String previousNames = resultSet.getString("names");
+            String previousEmail = resultSet.getString("email");
+            String previousPhone = resultSet.getString("phone_number");
+            Date previousDob = resultSet.getDate("date_of_birth");
+            String previousAddress = resultSet.getString("address");
+
+            //Setting new update values
+            newNames = (getNames() != null) ? getNames() : previousNames;
+            newEmail = (getEmail() != null) ? getEmail() : previousEmail;
+            newPhone = (getPhoneNumber() != null) ? getPhoneNumber() : previousPhone;
+            newDob = (getDateOfBirth() != null) ? getDateOfBirth() : previousDob;
+            newAddress = (getAddress() != null) ? getAddress() : previousAddress;
 
         } catch (Exception e){
             return e.getMessage();
         }
+
+
 
         // Update an existing record in students
         System.out.println("Update student");
@@ -150,15 +182,12 @@ public class StudentImplementation extends Student implements CrudInterface {
                 WHERE id = ?
                 """;
 
-        setNames("Rose");
-        setEmail("Rose@gmail.com");
-
         try(PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, getNames());
-            statement.setString(2, getEmail());
-            statement.setString(3, getPhoneNumber());
-            statement.setDate(4, new java.sql.Date(getDateOfBirth().getTime()));
-            statement.setString(5, getAddress());
+            statement.setString(1, newNames);
+            statement.setString(2, newEmail);
+            statement.setString(3, newPhone);
+            statement.setDate(4, new java.sql.Date(newDob.getTime()));
+            statement.setString(5, newAddress);
             statement.setInt(6, id);
             statement.executeUpdate();
 
