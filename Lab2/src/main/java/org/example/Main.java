@@ -28,7 +28,8 @@ public class Main {
 //            CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
 //            System.out.println(course.delete(32));
 
-            InstructorImplementation instructor = new InstructorImplementation(connection,"Alice","alice@gamil.com","+2507242342", "Senior Lecturer");
+            InstructorImplementation instructor = new InstructorImplementation(connection,"Linda","linda@gamil.com","+2507232382", "Senior Lecturer");
+            System.out.println(instructor.create());
 
             connection.close();
 
