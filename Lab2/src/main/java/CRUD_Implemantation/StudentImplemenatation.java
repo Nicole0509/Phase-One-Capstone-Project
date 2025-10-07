@@ -6,6 +6,7 @@ import models.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Date;
 
 public class StudentImplemenatation extends Student implements CrudInterface {
@@ -19,9 +20,6 @@ public class StudentImplemenatation extends Student implements CrudInterface {
 
     @Override
     public void create(){
-        System.out.println("Create a new student");
-        System.out.println(getNames());
-        System.out.println(getEmail());
 
         query = "INSERT INTO students (names, email, phone_number, date_of_birth, address) VALUES (?, ?, ?, ?, ?)";
 
@@ -45,12 +43,38 @@ public class StudentImplemenatation extends Student implements CrudInterface {
     }
 
     @Override
-    public void update(int i){
+    public void update(int id){
         System.out.println("Update student");
+        query = """
+                UPDATE students SET 
+                    names = ?,
+                    email = ?,
+                    phone_number = ?,
+                    date_of_birth = ?,
+                    address = ?
+                WHERE id = ?
+                """;
+
+        setNames("Rose");
+        setEmail("Rose@gmail.com");
+
+        try(PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, getNames());
+            statement.setString(2, getEmail());
+            statement.setString(3, getPhoneNumber());
+            statement.setDate(4, new java.sql.Date(getDateOfBirth().getTime()));
+            statement.setString(5, getAddress());
+            statement.setInt(6, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
     @Override
-    public void delete(int i){
+    public void delete(int id){
         System.out.println("Delete student");
     }
 

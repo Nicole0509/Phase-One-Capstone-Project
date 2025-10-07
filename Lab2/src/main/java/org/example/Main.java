@@ -23,7 +23,7 @@ public class Main {
 
             StudentImplemenatation student =new StudentImplemenatation(connection,"Angela","angela@gamil.com","+2507282098", Date.valueOf(LocalDate.now()),"Kimironko");
 
-            student.create();
+            student.update(3);
 
 
             connection.close();
