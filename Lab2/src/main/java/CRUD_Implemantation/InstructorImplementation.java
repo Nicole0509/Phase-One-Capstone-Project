@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class InstructorImplementation extends Instructor implements CrudInterface {
     private final Connection connection;
@@ -133,8 +134,73 @@ public class InstructorImplementation extends Instructor implements CrudInterfac
 
     @Override
     public String update(int id){
-        return "";
+
+        // Variables that will be used to get user in put
+        String newNames = null;
+        String newEmail = null;
+        String newPhone = null;
+        String newPosition = null;
+
+        // Check if a particular exists
+        String selectQuery = "SELECT * FROM instructors WHERE id = ?";
+
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
+
+            selectStatement.setInt(1, id);
+            ResultSet resultSet = selectStatement.executeQuery();
+
+            if (!resultSet.next()) {
+                return "No Instructor found with ID " + id;
+            }
+
+            //Setting new update values
+            setNames(newNames);
+            setEmail(newEmail);
+            setPhoneNumber(newPhone);
+            setPosition(newPosition);
+
+            //Getting values from the DB
+            String previousNames = resultSet.getString("names");
+            String previousEmail = resultSet.getString("email");
+            String previousPhone = resultSet.getString("phone_number");
+            String previousPosition = resultSet.getString("position");
+
+            //Setting new update values
+            newNames = (getNames() != null) ? getNames() : previousNames;
+            newEmail = (getEmail() != null) ? getEmail() : previousEmail;
+            newPhone = (getPhoneNumber() != null) ? getPhoneNumber() : previousPhone;
+            newPosition = (getPosition() != null) ? getPosition() : previousPosition;
+
+        } catch (Exception e){
+            return e.getMessage();
+        }
+
+
+
+        // Update an existing record in Instructors
+        query = """
+                UPDATE instructors SET 
+                    names = ?,
+                    email = ?,
+                    phone_number = ?,
+                    position = ?
+                WHERE id = ?
+                """;
+
+        try(PreparedStatement statement = connection.prepareStatement(query)) {
+            statement.setString(1, newNames);
+            statement.setString(2, newEmail);
+            statement.setString(3, newPhone);
+            statement.setString(4, newPosition);
+            statement.setInt(5, id);
+            statement.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "Instructor with id: " + id + " was updated successfully!";
     }
+
 
     @Override
     public String delete(int id){

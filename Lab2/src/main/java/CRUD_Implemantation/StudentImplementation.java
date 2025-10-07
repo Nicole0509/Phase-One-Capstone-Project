@@ -186,8 +186,6 @@ public class StudentImplementation extends Student implements CrudInterface {
             return e.getMessage();
         }
 
-
-
         // Update an existing record in students
         System.out.println("Update student");
         query = """
