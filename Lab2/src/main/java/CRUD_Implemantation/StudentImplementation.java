@@ -126,7 +126,7 @@ public class StudentImplementation extends Student implements CrudInterface {
 
         // Variables that will be used to get user in put
         String newNames = null;
-        String newEmail = null;
+        String newEmail = "angela@gmail.com";
         String newPhone = null;
         Date newDob = null;
         String newAddress = null;
@@ -194,20 +194,26 @@ public class StudentImplementation extends Student implements CrudInterface {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return null;
+        return "Student with id: " + id + " was updated successfully!";
     }
 
     @Override
-    public void delete(int id){
+    public String delete(int id){
         query = """
                 DELETE FROM students WHERE id = ?
         """;
 
         try(PreparedStatement statement = connection.prepareStatement(query)){
             statement.setInt(1, id);
-            statement.executeUpdate();
+            int rows = statement.executeUpdate();
+
+            if (rows>0){
+                return "Record with id " + id + "was successfully deleted!" ;
+            } else {
+                return "Found no record with id " + id;
+            }
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return  e.getMessage();
         }
     }
 
