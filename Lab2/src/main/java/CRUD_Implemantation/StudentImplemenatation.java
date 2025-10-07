@@ -20,7 +20,7 @@ public class StudentImplemenatation extends Student implements CrudInterface {
     }
 
     @Override
-    public void create(){
+    public String create(){
 
         query = "INSERT INTO students (names, email, phone_number, date_of_birth, address) VALUES (?, ?, ?, ?, ?)";
 
@@ -31,11 +31,21 @@ public class StudentImplemenatation extends Student implements CrudInterface {
             statement.setString(3, getPhoneNumber());
             statement.setDate(4, new java.sql.Date(getDateOfBirth().getTime()));
             statement.setString(5, getAddress());
-            statement.executeUpdate();
 
+            int rows = statement.executeUpdate();
+
+            if(rows>0){
+                return "Student created successfully!";
+            } else {
+                return "No student inserted. Something went wrong.";
+            }
+
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
         } catch (Exception e){
-            e.printStackTrace();
+            System.err.println(e.getMessage());
         }
+        return null;
     }
 
     @Override
