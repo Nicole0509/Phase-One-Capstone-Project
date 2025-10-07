@@ -26,7 +26,7 @@ public class Main {
 //            student.viewAll();
 
             CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
-            System.out.println(course.update(2));
+            System.out.println(course.delete(32));
 
             connection.close();
 

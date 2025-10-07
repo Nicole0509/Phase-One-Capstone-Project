@@ -129,8 +129,6 @@ public class CourseImplementation extends Course implements CrudInterface {
             return e.getMessage();
         }
 
-
-
         // Update an existing record in courses
         query = """
                 UPDATE courses SET 
@@ -153,7 +151,23 @@ public class CourseImplementation extends Course implements CrudInterface {
         return "Course with id: " + id + " was updated successfully!";
     }
 
-    public String delete(int id) {
-        return "";
+    @Override
+    public String delete(int id){
+        query = """
+                DELETE FROM courses WHERE id = ?
+        """;
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            int rows = statement.executeUpdate();
+
+            if (rows>0){
+                return "Record with id " + id + " was successfully deleted!" ;
+            } else {
+                return "Found no record with id " + id;
+            }
+        } catch (SQLException e) {
+            return  e.getMessage();
+        }
     }
 }

@@ -208,7 +208,7 @@ public class StudentImplementation extends Student implements CrudInterface {
             int rows = statement.executeUpdate();
 
             if (rows>0){
-                return "Record with id " + id + "was successfully deleted!" ;
+                return "Record with id " + id + " was successfully deleted!" ;
             } else {
                 return "Found no record with id " + id;
             }
