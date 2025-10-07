@@ -3,8 +3,10 @@ package org.example;
 import CRUD_Implemantation.*;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class Main {
 
@@ -18,12 +20,13 @@ public class Main {
 
         if (connection != null) {
 //            Database connection established
+            
 
 //            StudentImplementation student =new StudentImplementation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
-//            System.out.println(student.update(6));
+//            student.viewAll();
 
             CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
-            System.out.println(course.create());
+            course.viewAll();
 
             connection.close();
 

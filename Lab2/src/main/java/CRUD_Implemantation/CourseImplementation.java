@@ -63,8 +63,30 @@ public class CourseImplementation extends Course implements CrudInterface {
     }
 
     @Override
-    public String viewAll() {
-        return "";
+    public void viewAll(){
+        String query = "SELECT * FROM courses";
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+
+                //Getting values from the DB
+                setCourseName(resultSet.getString("name"));
+                setDescription(resultSet.getString("description"));
+                setCredits(resultSet.getInt("credits"));
+
+                System.out.println( "ID: " + id +
+                        " \t Course Name : " + getCourseName() +
+                        "\t Course Description: " + getDescription() +
+                        "\t Credits: " + getCredits()
+                );
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

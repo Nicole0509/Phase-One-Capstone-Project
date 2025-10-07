@@ -92,7 +92,7 @@ public class StudentImplementation extends Student implements CrudInterface {
     }
 
     @Override
-    public String viewAll(){
+    public void viewAll(){
         String query = "SELECT * FROM students";
 
         try(PreparedStatement statement = connection.prepareStatement(query)){
@@ -108,17 +108,17 @@ public class StudentImplementation extends Student implements CrudInterface {
                 setDateOfBirth(resultSet.getDate("date_of_birth"));
                 setAddress(resultSet.getString("address"));
 
-                return "ID: " + id +
+                System.out.println( "ID: " + id +
                         " \t Names : " + getNames() +
                         "\t Email: " + getPhoneNumber() +
                         "\t Date of Birth: " + getDateOfBirth() +
-                        "\t Address : " + getAddress();
+                        "\t Address : " + getAddress()
+                );
             }
 
         } catch (Exception e){
-            return  e.getMessage();
+            System.out.println(e.getMessage());
         }
-        return null;
     }
 
     @Override
