@@ -61,6 +61,24 @@ public class StudentImplementation extends Student implements CrudInterface {
             return null;
         }
 
+        // Duplicate phone number check
+        String checkPhoneQuery = "SELECT COUNT(*) FROM students WHERE phone_number = ?";
+
+        try (PreparedStatement checkPhoneStmt = connection.prepareStatement(checkPhoneQuery)) {
+
+            checkPhoneStmt.setString(1, getPhoneNumber());
+            ResultSet rs = checkPhoneStmt.executeQuery();
+
+            if (rs.next() && rs.getInt(1) > 0) {
+                return "A student with this phone number already exists.";
+            }
+            rs.close();
+
+        }  catch (SQLException e) {
+            System.err.println(e.getMessage());
+            return null;
+        }
+
         //Creating a student record in the DB
         query = """
         INSERT INTO students (names, email, phone_number, date_of_birth, address)

@@ -22,8 +22,9 @@ public class Main {
 //            Database connection established
 
 
-//            StudentImplementation student =new StudentImplementation(connection,"Angela","angela@gamil.com","+2507276098", Date.valueOf(LocalDate.now()),"Kimironko");
+            StudentImplementation student =new StudentImplementation(connection,"Leila","leila@gamil.com","+2507476098", Date.valueOf(LocalDate.now()),"Kimironko");
 //            student.viewAll();
+//            System.out.println(student.create());
 
 //            CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
 //            System.out.println(course.delete(32));
