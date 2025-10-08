@@ -32,7 +32,7 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
         }
 
         if (getEnrollmentDate() == null) {
-            return "Validation failed: Date of birth cannot be null.";
+            return "Validation failed: Enrollment Date cannot be null.";
         }
 
         if (getCompletionStatus() == null || getCompletionStatus().isBlank()) {
@@ -76,8 +76,6 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
         if (courseId == -1) {
             return "Error: Course not found in database.";
         }
-
-
 
         //Creating a student record in the DB
         query = """
