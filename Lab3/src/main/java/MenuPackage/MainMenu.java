@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class MainMenu {
     StudentCRUDMenu studentMenu = new StudentCRUDMenu();
+    CourseCRUDMenu courseMenu = new CourseCRUDMenu();
+
     Scanner scanner = new Scanner(System.in);
 
     public void start(){
@@ -37,6 +39,7 @@ public class MainMenu {
                 break;
             case 2:
                 System.out.println("Manage Courses");
+                courseMenu.switchCourseMenuOptions(courseMenu.courseMenu());
                 break;
             case 3:
                 System.out.println("Manage Instructors");
