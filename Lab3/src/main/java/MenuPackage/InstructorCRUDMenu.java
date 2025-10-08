@@ -1,5 +1,7 @@
 package MenuPackage;
 
+import CRUD_Implemantation.InstructorImplementation;
+
 import java.sql.Connection;
 import java.util.Scanner;
 
@@ -31,6 +33,8 @@ public class InstructorCRUDMenu {
                 break;
             case 2:
                 System.out.println("View All Instructors");
+                InstructorImplementation instructor = new InstructorImplementation(connection,"Linda","linda@gamil.com","+2507232382", "Senior Lecturer");
+                instructor.viewAll();
                 break;
             case 3:
                 System.out.println("Update Instructor");
