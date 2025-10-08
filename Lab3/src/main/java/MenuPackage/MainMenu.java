@@ -6,6 +6,15 @@ public class MainMenu {
     StudentCRUDMenu studentMenu = new StudentCRUDMenu();
     Scanner scanner = new Scanner(System.in);
 
+    public void start(){
+        int choice;
+        do {
+            choice = menu();
+            switchMenuOptions (choice);
+        } while (choice != 0);
+
+    }
+
     public int menu() {
         System.out.println("\n=== Student Management System ===");
 
@@ -39,7 +48,7 @@ public class MainMenu {
                 System.out.println("Assign Course Instructors");
                 break;
             case 0:
-                System.out.println("Exit the Application");
+                System.out.println("The System says GoodBye!");
                 break;
             default:
                 System.out.println("Invalid choice");

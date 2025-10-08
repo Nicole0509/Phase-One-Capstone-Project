@@ -8,6 +8,6 @@ public class Main {
 
         MainMenu mainMenu = new MainMenu();
 
-        mainMenu.switchMenuOptions(mainMenu.menu());
+        mainMenu.start();
     }
 }
