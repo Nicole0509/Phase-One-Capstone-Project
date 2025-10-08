@@ -110,7 +110,32 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
 
     @Override
     public void viewAll(){
+        String query = "SELECT * FROM enrollments";
 
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+
+                //Getting values from the DB
+                int studentId = resultSet.getInt("student_id");
+                int courseId = resultSet.getInt("course_id");
+
+                setEnrollmentDate(resultSet.getDate("enrollment_date"));
+                setCompletionStatus(resultSet.getString("completion_status"));
+
+                System.out.println( "ID: " + id +
+                        " \t Student name: " + studentId +
+                        "\t Course name: : " + courseId +
+                        "\t Enrollment Date: " + getEnrollmentDate() +
+                        "\t Completion Status: " + getCompletionStatus()
+                );
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override
