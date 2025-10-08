@@ -79,4 +79,14 @@ public class InstructorCRUDMenu {
         System.out.println(result);
     }
 
+    private void deleteInstructor() {
+
+        System.out.print("Enter ID of instructor to delete: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        String result = instructorImplementation.delete(id);
+        System.out.println(result);
+    }
+
 }
