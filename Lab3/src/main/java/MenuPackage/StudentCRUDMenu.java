@@ -35,7 +35,7 @@ public class StudentCRUDMenu {
 
         switch (choice) {
             case 1:
-                System.out.println("Create Student");
+                createStudent();
                 break;
             case 2:
                 viewAllStudents();
@@ -60,4 +60,24 @@ public class StudentCRUDMenu {
         studentImplementation.viewAll();
     }
 
+
+    private void createStudent() {
+        System.out.println("\n=== Create Student ===");
+        System.out.print("Enter student name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter phone: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter address: ");
+        String address = scanner.nextLine();
+
+        Date dateOfBirth = Date.valueOf(LocalDate.now());
+
+        StudentImplementation student = new StudentImplementation(connection, name, email, phone, dateOfBirth, address);
+        student.create();
+    }
 }
