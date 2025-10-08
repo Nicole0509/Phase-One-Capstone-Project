@@ -18,4 +18,30 @@ public class MainMenu {
         System.out.print("Enter your choice: ");
         return scanner.nextInt();
     }
+
+    public void switchMenuOptions(int choice) {
+        switch (choice) {
+            case 1:
+                System.out.println("Manage Students");
+                break;
+            case 2:
+                System.out.println("Manage Courses");
+                break;
+            case 3:
+                System.out.println("Manage Instructors");
+                break;
+            case 4:
+                System.out.println("Manage Enrollments");
+                break;
+            case 5:
+                System.out.println("Assign Course Instructors");
+                break;
+            case 6:
+                System.out.println("Exit the Application");
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
+    }
 }
