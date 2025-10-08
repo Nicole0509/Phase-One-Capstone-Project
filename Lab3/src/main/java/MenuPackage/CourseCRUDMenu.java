@@ -43,6 +43,7 @@ public class CourseCRUDMenu {
                 break;
             case 4:
                 System.out.println("Delete Course");
+                deleteCourse();
                 break;
             case 0:
                 System.out.println("Back to Main Menu");
@@ -75,4 +76,13 @@ public class CourseCRUDMenu {
         System.out.println(result);
     }
 
+    private void deleteCourse() {
+
+        System.out.print("Enter ID of course to delete: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        String result = courseImplementation.delete(id);
+        System.out.println(result);
+    }
 }
