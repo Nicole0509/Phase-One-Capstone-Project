@@ -31,14 +31,14 @@ public class StudentCRUDMenu {
     }
 
     public void switchStudentMenuOptions(int choice) {
+        scanner.nextLine();
+
         switch (choice) {
             case 1:
                 System.out.println("Create Student");
-                student.viewAll();
                 break;
             case 2:
-                System.out.println("View All Students");
-                student.viewAll();
+                viewAllStudents();
                 break;
             case 3:
                 System.out.println("Update Student");
@@ -54,4 +54,10 @@ public class StudentCRUDMenu {
                 break;
         }
     }
+
+    private void viewAllStudents() {
+        System.out.println("\n");
+        studentImplementation.viewAll();
+    }
+
 }
