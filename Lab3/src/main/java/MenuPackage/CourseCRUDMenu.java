@@ -57,4 +57,22 @@ public class CourseCRUDMenu {
         courseImplementation.viewAll();
     }
 
+    private void createCourse() {
+        scanner.nextLine();
+
+        System.out.print("Enter course name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter course description: ");
+        String description = scanner.nextLine();
+
+        System.out.print("Enter course credits: ");
+        int credits = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        CourseImplementation course = new CourseImplementation(connection, name, description, credits);
+        String result = course.create();
+        System.out.println(result);
+    }
+
 }
