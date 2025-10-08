@@ -1,7 +1,6 @@
 package MenuPackage;
 
 import CRUD_Implemantation.CourseImplementation;
-import CRUD_Implemantation.StudentImplementation;
 
 import java.sql.Connection;
 import java.util.Scanner;
@@ -30,6 +29,8 @@ public class CourseCRUDMenu {
     }
 
     public void switchCourseMenuOptions(int choice) {
+        scanner.nextLine();
+
         switch (choice) {
             case 1:
                 System.out.println("Create Course");
@@ -59,7 +60,6 @@ public class CourseCRUDMenu {
     }
 
     private void createCourse() {
-        scanner.nextLine();
 
         System.out.print("Enter course name: ");
         String name = scanner.nextLine();

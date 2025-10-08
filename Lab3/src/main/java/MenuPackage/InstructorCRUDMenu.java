@@ -8,9 +8,11 @@ import java.util.Scanner;
 public class InstructorCRUDMenu {
     Connection connection;
     Scanner scanner = new Scanner(System.in);
+    private final InstructorImplementation instructorImplementation;
 
     public InstructorCRUDMenu(Connection connection) {
         this.connection = connection;
+        this.instructorImplementation = new InstructorImplementation(connection);
     }
 
     public int instructorMenu() {
@@ -33,8 +35,7 @@ public class InstructorCRUDMenu {
                 break;
             case 2:
                 System.out.println("View All Instructors");
-                InstructorImplementation instructor = new InstructorImplementation(connection,"Linda","linda@gamil.com","+2507232382", "Senior Lecturer");
-                instructor.viewAll();
+                viewAllInstructors();
                 break;
             case 3:
                 System.out.println("Update Instructor");
@@ -49,5 +50,9 @@ public class InstructorCRUDMenu {
                 System.out.println("Invalid choice");
                 break;
         }
+    }
+
+    private void viewAllInstructors() {
+        instructorImplementation.viewAll();
     }
 }
