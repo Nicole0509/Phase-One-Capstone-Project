@@ -1,5 +1,7 @@
 package MenuPackage;
 
+import CRUD_Implemantation.CourseImplementation;
+
 import java.sql.Connection;
 import java.util.Scanner;
 
@@ -31,6 +33,8 @@ public class CourseCRUDMenu {
                 break;
             case 2:
                 System.out.println("View All Courses");
+                CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
+                course.viewAll();
                 break;
             case 3:
                 System.out.println("Update Course");
