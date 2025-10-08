@@ -1,15 +1,29 @@
 package MenuPackage;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class MainMenu {
-    StudentCRUDMenu studentMenu = new StudentCRUDMenu();
-    CourseCRUDMenu courseMenu = new CourseCRUDMenu();
-    InstructorCRUDMenu instructorMenu = new InstructorCRUDMenu();
-    EnrollmentCRUDMenu enrollmentMenu = new EnrollmentCRUDMenu();
-    CourseInstructorCRUDMenu courseInstructorMenu = new CourseInstructorCRUDMenu();
+    private final Connection connection;
+
+    private final StudentCRUDMenu studentMenu;
+    private final CourseCRUDMenu courseMenu;
+    private final InstructorCRUDMenu instructorMenu;
+    private final EnrollmentCRUDMenu enrollmentMenu;
+    private final CourseInstructorCRUDMenu courseInstructorMenu;
 
     Scanner scanner = new Scanner(System.in);
+
+    public MainMenu(Connection connection) {
+        this.connection = connection;
+
+        this.studentMenu = new StudentCRUDMenu(connection);
+        this.courseMenu = new CourseCRUDMenu(connection);
+        this.instructorMenu = new InstructorCRUDMenu(connection);
+        this.enrollmentMenu = new EnrollmentCRUDMenu(connection);
+        this.courseInstructorMenu = new CourseInstructorCRUDMenu(connection);
+    }
+
 
     public void start(){
         int choice;

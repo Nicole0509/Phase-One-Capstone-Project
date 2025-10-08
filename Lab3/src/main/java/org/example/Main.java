@@ -17,14 +17,13 @@ public class Main {
         Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
 
         if (connection != null) {
-            System.out.println("Database connection established");
+//            System.out.println("Database connection established");
+            MainMenu mainMenu = new MainMenu(connection);
+
+            mainMenu.start();
         } else  {
             System.out.println("Database connection could not be established");
         }
 
-
-//        MainMenu mainMenu = new MainMenu();
-//
-//        mainMenu.start();
     }
 }

@@ -1,9 +1,19 @@
 package MenuPackage;
 
+import CRUD_Implemantation.StudentImplementation;
+
+import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class StudentCRUDMenu {
+    Connection connection;
     Scanner scanner = new Scanner(System.in);
+
+    public StudentCRUDMenu(Connection connection) {
+        this.connection = connection;
+    }
 
     public int studentMenu() {
         System.out.println("\n=== Student CRUD Menu  ===");

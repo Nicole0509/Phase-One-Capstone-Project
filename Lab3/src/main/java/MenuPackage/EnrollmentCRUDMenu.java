@@ -1,9 +1,15 @@
 package MenuPackage;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 public class EnrollmentCRUDMenu {
+    Connection connection;
     Scanner scanner = new Scanner(System.in);
+
+    public EnrollmentCRUDMenu(Connection connection) {
+        this.connection = connection;
+    }
 
     public int enrollmentMenu() {
         System.out.println("\n=== Enrollment CRUD Menu  ===");
