@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class InstructorCRUDMenu {
     Connection connection;
     Scanner scanner = new Scanner(System.in);
-    private final InstructorImplementation instructorImplementation;
+    private InstructorImplementation instructorImplementation;
 
     public InstructorCRUDMenu(Connection connection) {
         this.connection = connection;
@@ -29,9 +29,12 @@ public class InstructorCRUDMenu {
     }
 
     public void switchInstructorMenuOptions(int choice) {
+        scanner.nextLine();
+
         switch (choice) {
             case 1:
                 System.out.println("Create Instructor");
+                createInstructor();
                 break;
             case 2:
                 System.out.println("View All Instructors");
@@ -42,6 +45,7 @@ public class InstructorCRUDMenu {
                 break;
             case 4:
                 System.out.println("Delete Instructor");
+                deleteInstructor();
                 break;
             case 0:
                 System.out.println("Back to Main Menu");
@@ -55,4 +59,24 @@ public class InstructorCRUDMenu {
     private void viewAllInstructors() {
         instructorImplementation.viewAll();
     }
+
+    private void createInstructor() {
+
+        System.out.print("Enter instructor name: ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter instructor email: ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter instructor phone number: ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter instructor position/title: ");
+        String position = scanner.nextLine();
+
+        InstructorImplementation instructor = new InstructorImplementation(connection, name, email, phone, position);
+        String result = instructor.create();
+        System.out.println(result);
+    }
+
 }
