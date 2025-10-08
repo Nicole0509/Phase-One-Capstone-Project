@@ -34,7 +34,7 @@ public class StudentCRUDMenu {
                 break;
             case 0:
                 System.out.println("Back to Main Menu");
-                break;
+                return;
             default:
                 System.out.println("Invalid choice");
                 break;
