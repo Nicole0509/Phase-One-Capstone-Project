@@ -14,6 +14,11 @@ public class StudentImplementation extends Student implements CrudInterface {
     private final Connection connection;
     String query;
 
+    public StudentImplementation(Connection connection) {
+        super();
+        this.connection = connection;
+    }
+
     public StudentImplementation(Connection connection, String names, String email, String phoneNumber, Date dateOfBirth, String address) {
         super(names, email, phoneNumber, dateOfBirth, address);
         this.connection = connection;

@@ -3,11 +3,15 @@ package models;
 import java.util.Date;
 
 public class CourseInstructor {
-    private final Course course;
-    private final Instructor instructor;
+    private Course course;
+    private Instructor instructor;
     private int term;
     private Date startDate;
     private Date endDate;
+
+    public CourseInstructor() {
+        System.out.println();
+    }
 
     public CourseInstructor(Course course, Instructor instructor, int term, Date startDate, Date endDate) {
         this.course = course;

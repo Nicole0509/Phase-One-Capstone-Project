@@ -12,6 +12,10 @@ public abstract class Student extends Person{
     private Date dateOfBirth;
     private String address;
 
+    public Student(){
+        super();
+    }
+
     public Student(String names, String email, String phoneNumber, Date dateOfBirth, String address) {
         super(names, email, phoneNumber);
         this.setDateOfBirth(dateOfBirth);

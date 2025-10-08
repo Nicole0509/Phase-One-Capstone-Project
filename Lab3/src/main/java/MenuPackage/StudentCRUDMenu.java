@@ -10,9 +10,11 @@ import java.util.Scanner;
 public class StudentCRUDMenu {
     Connection connection;
     Scanner scanner = new Scanner(System.in);
+    private final StudentImplementation studentImplementation;
 
     public StudentCRUDMenu(Connection connection) {
         this.connection = connection;
+        this.studentImplementation = new StudentImplementation(connection);
     }
 
     public int studentMenu() {
@@ -32,10 +34,10 @@ public class StudentCRUDMenu {
         switch (choice) {
             case 1:
                 System.out.println("Create Student");
+                student.viewAll();
                 break;
             case 2:
                 System.out.println("View All Students");
-                StudentImplementation student =new StudentImplementation(connection,"Leila","leila@gamil.com","+2507476098", Date.valueOf(LocalDate.now()),"Kimironko");
                 student.viewAll();
                 break;
             case 3:
