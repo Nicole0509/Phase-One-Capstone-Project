@@ -15,6 +15,11 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
     private final Connection connection;
     String query;
 
+    public EnrollmentImplementation(Connection connection) {
+        super();
+        this.connection = connection;
+    }
+
     public EnrollmentImplementation(Connection connection, Student student, Course course, Date enrollmentDate, String completionStatus, double grade) {
         super(student, course, enrollmentDate, completionStatus, grade);
         this.connection = connection;

@@ -15,6 +15,11 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
     private final Connection connection;
     String query;
 
+    public CourseInstructorImplementation(Connection connection) {
+        super();
+        this.connection = connection;
+    }
+
     public CourseInstructorImplementation(Connection connection,Course course, Instructor instructor, int term, Date startDate, Date endDate){
         super(course, instructor, term, startDate, endDate);
         this.connection = connection;

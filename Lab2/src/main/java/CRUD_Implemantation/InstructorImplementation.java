@@ -7,11 +7,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
+
 
 public class InstructorImplementation extends Instructor implements CrudInterface {
     private final Connection connection;
     String query;
+
+    public InstructorImplementation(Connection connection) {
+        super();
+        this.connection = connection;
+    }
 
     public InstructorImplementation(Connection connection,String names, String email, String phoneNumber, String position){
         super(names,email,phoneNumber,position);

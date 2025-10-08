@@ -13,6 +13,11 @@ public class CourseImplementation extends Course implements CrudInterface {
     private final Connection connection;
     String query;
 
+    public CourseImplementation(Connection connection) {
+        super();
+        this.connection = connection;
+    }
+
     public CourseImplementation(Connection connection,String courseName, String description, int credits) {
         super(courseName, description, credits);
         this.connection = connection;
