@@ -35,16 +35,18 @@ public class StudentCRUDMenu {
 
         switch (choice) {
             case 1:
+                System.out.println("\nCreate A Student");
                 createStudent();
                 break;
             case 2:
                 viewAllStudents();
                 break;
             case 3:
-                System.out.println("Update Student");
+                System.out.println("\nUpdate Student");
                 break;
             case 4:
-                System.out.println("Delete Student");
+                System.out.println("\nDelete Student");
+                deleteStudent();
                 break;
             case 0:
                 System.out.println("Back to Main Menu");
@@ -62,7 +64,6 @@ public class StudentCRUDMenu {
 
 
     private void createStudent() {
-        System.out.println("\n=== Create Student ===");
         System.out.print("Enter student name: ");
         String name = scanner.nextLine();
 
@@ -79,5 +80,15 @@ public class StudentCRUDMenu {
 
         StudentImplementation student = new StudentImplementation(connection, name, email, phone, dateOfBirth, address);
         student.create();
+    }
+
+    private void deleteStudent() {
+
+        System.out.print("Enter ID of student to delete: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        String result = studentImplementation.delete(id);
+        System.out.println(result);
     }
 }
