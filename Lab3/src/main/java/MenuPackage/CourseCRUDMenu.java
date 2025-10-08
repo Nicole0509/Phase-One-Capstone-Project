@@ -1,16 +1,19 @@
 package MenuPackage;
 
 import CRUD_Implemantation.CourseImplementation;
+import CRUD_Implemantation.StudentImplementation;
 
 import java.sql.Connection;
 import java.util.Scanner;
 
 public class CourseCRUDMenu {
-    Connection connection;
-    Scanner scanner = new Scanner(System.in);
+    private final Connection connection;
+    private final Scanner scanner = new Scanner(System.in);
+    private final CourseImplementation courseImplementation;
 
     public CourseCRUDMenu(Connection connection) {
         this.connection = connection;
+        this.courseImplementation = new CourseImplementation(connection);
     }
 
     public int courseMenu() {
@@ -30,11 +33,10 @@ public class CourseCRUDMenu {
         switch (choice) {
             case 1:
                 System.out.println("Create Course");
+                createCourse();
                 break;
             case 2:
-                System.out.println("View All Courses");
-                CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
-                course.viewAll();
+                viewAllCourses();
                 break;
             case 3:
                 System.out.println("Update Course");
@@ -50,4 +52,9 @@ public class CourseCRUDMenu {
                 break;
         }
     }
+
+    private void viewAllCourses() {
+        courseImplementation.viewAll();
+    }
+
 }
