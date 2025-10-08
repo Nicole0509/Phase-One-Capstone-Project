@@ -65,6 +65,8 @@ public class CourseImplementation extends Course implements CrudInterface {
 
     @Override
     public void viewAll(){
+        System.out.println("A list of all courses\n");
+
         String query = "SELECT * FROM courses";
 
         try(PreparedStatement statement = connection.prepareStatement(query)){

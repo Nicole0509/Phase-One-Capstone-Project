@@ -111,6 +111,8 @@ public class StudentImplementation extends Student implements CrudInterface {
 
     @Override
     public void viewAll(){
+        System.out.println("A list of all students\n");
+
         String query = "SELECT * FROM students";
 
         try(PreparedStatement statement = connection.prepareStatement(query)){

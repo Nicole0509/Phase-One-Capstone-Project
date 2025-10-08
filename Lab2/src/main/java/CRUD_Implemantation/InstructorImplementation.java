@@ -105,6 +105,8 @@ public class InstructorImplementation extends Instructor implements CrudInterfac
 
     @Override
     public void viewAll(){
+        System.out.println("A list of all instructors\n");
+
         String query = "SELECT * FROM instructors";
 
         try(PreparedStatement statement = connection.prepareStatement(query)){

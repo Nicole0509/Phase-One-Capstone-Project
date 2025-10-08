@@ -116,6 +116,8 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
 
     @Override
     public void viewAll(){
+        System.out.println("A list of all course instructors\n");
+
         String query = "SELECT * FROM course_instructor";
 
         try(PreparedStatement statement = connection.prepareStatement(query)){
@@ -132,7 +134,7 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
                 setEndDate(resultSet.getDate("end_date"));
 
                 System.out.println( "ID: " + id +
-                        " \t Student id: " + instructorId +
+                        " \t Instructor id: " + instructorId +
                         "\t Course id: " + courseId +
                         "\t Term/Semester: " + getTerm() +
                         "\t Start Date: " + getStartDate() +
@@ -214,6 +216,21 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
 
     @Override
     public String delete(int id){
-        return "";
+        query = """
+                DELETE FROM course_instructor WHERE id = ?
+        """;
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            int rows = statement.executeUpdate();
+
+            if (rows>0){
+                return "Record with id " + id + " was successfully deleted!" ;
+            } else {
+                return "Found no record with id " + id;
+            }
+        } catch (SQLException e) {
+            return  e.getMessage();
+        }
     }
 }

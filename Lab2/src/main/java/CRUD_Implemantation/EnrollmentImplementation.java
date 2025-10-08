@@ -110,6 +110,8 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
 
     @Override
     public void viewAll(){
+        System.out.println("A list of all enrollments\n");
+
         String query = "SELECT * FROM enrollments";
 
         try(PreparedStatement statement = connection.prepareStatement(query)){
@@ -126,8 +128,8 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
                 setCompletionStatus(resultSet.getString("completion_status"));
 
                 System.out.println( "ID: " + id +
-                        " \t Student name: " + studentId +
-                        "\t Course name: : " + courseId +
+                        " \t Student id: " + studentId +
+                        "\t Course id: " + courseId +
                         "\t Enrollment Date: " + getEnrollmentDate() +
                         "\t Completion Status: " + getCompletionStatus()
                 );

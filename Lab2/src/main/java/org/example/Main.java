@@ -25,22 +25,23 @@ public class Main {
 
 
             StudentImplementation student =new StudentImplementation(connection,"Leila","leila@gamil.com","+2507476098", Date.valueOf(LocalDate.now()),"Kimironko");
-//            student.viewAll();
-//            System.out.println(student.create());
+            student.viewAll();
 
+            System.out.println("\n");
             CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
-//            System.out.println(course.delete(32));
+            course.viewAll();
 
+            System.out.println("\n");
             InstructorImplementation instructor = new InstructorImplementation(connection,"Linda","linda@gamil.com","+2507232382", "Senior Lecturer");
-//            System.out.println(instructor.delete(3));
-//            instructor.viewAll();
-            EnrollmentImplementation enrollment = new EnrollmentImplementation(connection,student,course,Date.valueOf(LocalDate.now()),"On going",74);
-            System.out.println(enrollment.delete(3));
-//            enrollment.viewAll();
+            instructor.viewAll();
 
+            System.out.println("\n");
+            EnrollmentImplementation enrollment = new EnrollmentImplementation(connection,student,course,Date.valueOf(LocalDate.now()),"On going",74);
+            enrollment.viewAll();
+
+            System.out.println("\n");
             CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
-//            System.out.println(courseInstructor.update(1));
-//            courseInstructor.viewAll();
+            courseInstructor.viewAll();
 
             connection.close();
 
