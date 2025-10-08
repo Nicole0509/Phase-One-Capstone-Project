@@ -24,7 +24,7 @@ public class MainMenu {
         switch (choice) {
             case 1:
                 System.out.println("Manage Students");
-                studentMenu.studentMenu();
+                studentMenu.switchStudentMenuOptions(studentMenu.studentMenu());
                 break;
             case 2:
                 System.out.println("Manage Courses");

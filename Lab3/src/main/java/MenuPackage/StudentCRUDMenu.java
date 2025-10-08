@@ -17,4 +17,27 @@ public class StudentCRUDMenu {
         System.out.print("Enter your choice: ");
         return scanner.nextInt();
     }
+
+    public void switchStudentMenuOptions(int choice) {
+        switch (choice) {
+            case 1:
+                System.out.println("Create Student");
+                break;
+            case 2:
+                System.out.println("View All Students");
+                break;
+            case 3:
+                System.out.println("Update Student");
+                break;
+            case 4:
+                System.out.println("Delete Student");
+                break;
+            case 0:
+                System.out.println("Back to Main Menu");
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
+    }
 }
