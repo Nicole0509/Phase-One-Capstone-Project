@@ -3,6 +3,7 @@ package MenuPackage;
 import java.util.Scanner;
 
 public class MainMenu {
+    StudentCRUDMenu studentMenu = new StudentCRUDMenu();
     Scanner scanner = new Scanner(System.in);
 
     public int menu() {
@@ -13,7 +14,7 @@ public class MainMenu {
         System.out.println("3. Manage Instructors");
         System.out.println("4. Manage Enrollments");
         System.out.println("5. Assign Course Instructors");
-        System.out.println("6. Exit\n");
+        System.out.println("0. Exit\n");
 
         System.out.print("Enter your choice: ");
         return scanner.nextInt();
@@ -23,6 +24,7 @@ public class MainMenu {
         switch (choice) {
             case 1:
                 System.out.println("Manage Students");
+                studentMenu.studentMenu();
                 break;
             case 2:
                 System.out.println("Manage Courses");
@@ -36,7 +38,7 @@ public class MainMenu {
             case 5:
                 System.out.println("Assign Course Instructors");
                 break;
-            case 6:
+            case 0:
                 System.out.println("Exit the Application");
                 break;
             default:
