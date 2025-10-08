@@ -115,7 +115,34 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
     }
 
     @Override
-    public void  viewAll(){
+    public void viewAll(){
+        String query = "SELECT * FROM course_instructor";
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                int id = resultSet.getInt("id");
+
+                //Getting values from the DB
+                int instructorId = resultSet.getInt("instructor_id");
+                int courseId = resultSet.getInt("course_id");
+                setTerm(resultSet.getInt("term"));
+                setStartDate(resultSet.getDate("start_date"));
+                setEndDate(resultSet.getDate("end_date"));
+
+                System.out.println( "ID: " + id +
+                        " \t Student id: " + instructorId +
+                        "\t Course id: " + courseId +
+                        "\t Term/Semester: " + getTerm() +
+                        "\t Start Date: " + getStartDate() +
+                        "\t End Date: " + getEndDate()
+                );
+            }
+
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
     @Override

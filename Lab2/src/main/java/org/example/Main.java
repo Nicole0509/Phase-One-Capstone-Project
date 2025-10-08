@@ -36,10 +36,11 @@ public class Main {
 //            instructor.viewAll();
             EnrollmentImplementation enrollment = new EnrollmentImplementation(connection,student,course,Date.valueOf(LocalDate.now()),"On going",74);
 //            System.out.println(enrollment.create());
+//            enrollment.viewAll();
 
-            enrollment.viewAll();
-//            CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
+            CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
 //            System.out.println(courseInstructor.create());
+            courseInstructor.viewAll();
 
             connection.close();
 
