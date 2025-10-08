@@ -6,6 +6,7 @@ public class MainMenu {
     StudentCRUDMenu studentMenu = new StudentCRUDMenu();
     CourseCRUDMenu courseMenu = new CourseCRUDMenu();
     InstructorCRUDMenu instructorMenu = new InstructorCRUDMenu();
+    EnrollmentCRUDMenu enrollmentMenu = new EnrollmentCRUDMenu();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -37,17 +38,22 @@ public class MainMenu {
             case 1:
                 System.out.println("Manage Students");
                 studentMenu.switchStudentMenuOptions(studentMenu.studentMenu());
+
                 break;
             case 2:
                 System.out.println("Manage Courses");
                 courseMenu.switchCourseMenuOptions(courseMenu.courseMenu());
+
                 break;
             case 3:
                 System.out.println("Manage Instructors");
                 instructorMenu.switchInstructorMenuOptions(instructorMenu.instructorMenu());
+
                 break;
             case 4:
                 System.out.println("Manage Enrollments");
+                enrollmentMenu.switchEnrollmentMenuOptions(enrollmentMenu.enrollmentMenu());
+
                 break;
             case 5:
                 System.out.println("Assign Course Instructors");
