@@ -201,6 +201,22 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
 
     @Override
     public String delete(int id){
-        return "";
+        query = """
+                DELETE FROM enrollments WHERE id = ?
+        """;
+
+        try(PreparedStatement statement = connection.prepareStatement(query)){
+            statement.setInt(1, id);
+            int rows = statement.executeUpdate();
+
+            if (rows>0){
+                return "Record with id " + id + " was successfully deleted!" ;
+            } else {
+                return "Found no record with id " + id;
+            }
+        } catch (SQLException e) {
+            return  e.getMessage();
+        }
     }
+
 }
