@@ -7,6 +7,7 @@ public class MainMenu {
     CourseCRUDMenu courseMenu = new CourseCRUDMenu();
     InstructorCRUDMenu instructorMenu = new InstructorCRUDMenu();
     EnrollmentCRUDMenu enrollmentMenu = new EnrollmentCRUDMenu();
+    CourseInstructorCRUDMenu courseInstructorMenu = new CourseInstructorCRUDMenu();
 
     Scanner scanner = new Scanner(System.in);
 
@@ -57,6 +58,8 @@ public class MainMenu {
                 break;
             case 5:
                 System.out.println("Assign Course Instructors");
+                courseInstructorMenu.switchCourseInstructorMenuOptions(courseInstructorMenu.courseInstructorMenu());
+
                 break;
             case 0:
                 System.out.println("The System says GoodBye!");
