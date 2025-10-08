@@ -35,6 +35,8 @@ public class StudentCRUDMenu {
                 break;
             case 2:
                 System.out.println("View All Students");
+                StudentImplementation student =new StudentImplementation(connection,"Leila","leila@gamil.com","+2507476098", Date.valueOf(LocalDate.now()),"Kimironko");
+                student.viewAll();
                 break;
             case 3:
                 System.out.println("Update Student");
