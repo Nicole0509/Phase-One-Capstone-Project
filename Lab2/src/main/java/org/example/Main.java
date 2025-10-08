@@ -40,7 +40,7 @@ public class Main {
 
             CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
 //            System.out.println(courseInstructor.create());
-            courseInstructor.viewAll();
+//            courseInstructor.viewAll();
 
             connection.close();
 
