@@ -1,6 +1,7 @@
 package org.example;
 
 import CRUD_Implemantation.*;
+import models.Enrollment;
 
 import java.sql.Connection;
 import java.sql.Date;
@@ -26,12 +27,14 @@ public class Main {
 //            student.viewAll();
 //            System.out.println(student.create());
 
-//            CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
+            CourseImplementation course = new CourseImplementation(connection,"OS1", "Operating Systems", 10);
 //            System.out.println(course.delete(32));
 
 //            InstructorImplementation instructor = new InstructorImplementation(connection,"Linda","linda@gamil.com","+2507232382", "Senior Lecturer");
 //            System.out.println(instructor.delete(3));
 //            instructor.viewAll();
+            EnrollmentImplementation enrollment = new EnrollmentImplementation(connection,student,course,Date.valueOf(LocalDate.now()),"On going",74);
+            System.out.println(enrollment.create());
 
             connection.close();
 
