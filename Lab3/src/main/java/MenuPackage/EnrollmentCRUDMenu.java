@@ -43,6 +43,7 @@ public class EnrollmentCRUDMenu {
                 break;
             case 3:
                 System.out.println("Update Enrollment");
+                updateEnrollment();
                 break;
             case 4:
                 System.out.println("Delete Enrollment");
@@ -94,6 +95,49 @@ public class EnrollmentCRUDMenu {
     private void viewAllEnrollments() {
         EnrollmentImplementation enrollment = new EnrollmentImplementation(connection);
         enrollment.viewAll();
+    }
+
+    private void updateEnrollment() {
+        System.out.println("\n=== Update Enrollment ===");
+        System.out.print("Enter Enrollment ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        System.out.print("Enter Student Name (leave blank to keep current): ");
+        String studentName = scanner.nextLine();
+        Student student = null;
+        if (!studentName.isBlank()) {
+            student = new Student() {
+                @Override
+                public boolean isFullTime(CollectionManager collectionManager) {
+                    return false;
+                }
+            };
+            student.setNames(studentName);
+        }
+
+        System.out.print("Enter Course Name (leave blank to keep current): ");
+        String courseName = scanner.nextLine();
+        Course course = null;
+        if (!courseName.isBlank()) {
+            course = new Course();
+            course.setCourseName(courseName);
+        }
+
+        System.out.print("Enter Completion Status (Completed/On going/Dropped out) (leave blank to keep current): ");
+        String completionStatus = scanner.nextLine();
+
+        // Optional: let the user enter a custom enrollment date or leave blank to keep current
+        System.out.print("Enter Enrollment Date (yyyy-mm-dd) (leave blank to keep current): ");
+        String enrollmentDateStr = scanner.nextLine();
+        Date enrollmentDate = enrollmentDateStr.isBlank() ? null : Date.valueOf(enrollmentDateStr);
+
+        // Create the implementation object with these new values
+        EnrollmentImplementation enrollment = new EnrollmentImplementation(connection, student, course, enrollmentDate, completionStatus, 0.0);
+
+        // Call the update method
+        String result = enrollment.update(id);
+        System.out.println(result);
     }
 
     private void deleteEnrollment() {
