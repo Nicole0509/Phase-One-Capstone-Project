@@ -42,6 +42,7 @@ public class InstructorCRUDMenu {
                 break;
             case 3:
                 System.out.println("Update Instructor");
+                updateInstructor();
                 break;
             case 4:
                 System.out.println("Delete Instructor");
@@ -78,6 +79,29 @@ public class InstructorCRUDMenu {
         String result = instructor.create();
         System.out.println(result);
     }
+
+    private void updateInstructor() {
+        System.out.print("Enter ID of instructor to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        System.out.print("Enter new name (press Enter to skip): ");
+        String name = scanner.nextLine();
+
+        System.out.print("Enter new email (press Enter to skip): ");
+        String email = scanner.nextLine();
+
+        System.out.print("Enter new phone number (press Enter to skip): ");
+        String phone = scanner.nextLine();
+
+        System.out.print("Enter new position/title (press Enter to skip): ");
+        String position = scanner.nextLine();
+
+        InstructorImplementation instructor = new InstructorImplementation(connection, name, email, phone, position);
+        String result = instructor.update(id);
+        System.out.println(result);
+    }
+
 
     private void deleteInstructor() {
 

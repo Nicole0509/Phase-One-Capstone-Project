@@ -41,7 +41,7 @@ public class CourseInstructorCRUDMenu {
                 break;
             case 3:
                 System.out.println("Update Course Instructor");
-                updateCourseInstructor();5
+                updateCourseInstructor();
                 break;
             case 4:
                 System.out.println("Delete CCourse Instructor");
