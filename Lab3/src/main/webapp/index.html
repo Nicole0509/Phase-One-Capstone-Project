@@ -6,19 +6,19 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <title>University Management System</title>
 </head>
-<body>
+<body class="bg-gray-100">
 <!--content wrapper-->
-    <div class="flex grid grid-cols-6">
+    <div class="flex grid grid-cols-6 min-h-screen">
         <!-- sidebar wrapper-->
-        <div class="col-span-2">
+        <div class="col-span-2 text-gray-700 p-5">
             <div>
-                <h2>University Management System</h2>
-                <ul>
-                    <li>Student</li>
-                    <li>Course</li>
-                    <li>Instructor</li>
-                    <li>Enrollments</li>
-                    <li>Course Instructor</li>
+                <h2 class="text-md font-bold mb-6">University Management System</h2>
+                <ul class="text-sm space-y-3">
+                    <li class="cursor-pointer border-r-4 border-red-400 hover:bg-red-100 p-2 rounded" onclick="showSection('student')">Student</li>
+                    <li class="cursor-pointer border-r-4 border-red-400 hover:bg-red-100 p-2 rounded" onclick="showSection('course')">Course</li>
+                    <li class="cursor-pointer border-r-4 border-red-400 hover:bg-red-100 p-2 rounded" onclick="showSection('instructor')">Instructor</li>
+                    <li class="cursor-pointer border-r-4 border-red-400 hover:bg-red-100 p-2 rounded" onclick="showSection('enrollment')">Enrollments</li>
+                    <li class="cursor-pointer border-r-4 border-red-400 hover:bg-red-100 p-2 rounded" onclick="showSection('courseInstructor')">Course Instructor</li>
                 </ul>
             </div>
         </div>
