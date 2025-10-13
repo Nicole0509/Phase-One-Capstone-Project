@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class InstructorCRUDMenu {
     Connection connection;
     Scanner scanner = new Scanner(System.in);
-    private InstructorImplementation instructorImplementation;
+    private final InstructorImplementation instructorImplementation;
 
     public InstructorCRUDMenu(Connection connection) {
         this.connection = connection;

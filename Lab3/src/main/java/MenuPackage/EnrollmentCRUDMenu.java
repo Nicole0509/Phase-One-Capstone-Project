@@ -1,6 +1,13 @@
 package MenuPackage;
 
+import CRUD_Implemantation.EnrollmentImplementation;
+import SuperPackage.CollectionManager;
+import models.Course;
+import models.Student;
+
 import java.sql.Connection;
+import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class EnrollmentCRUDMenu {
@@ -28,6 +35,7 @@ public class EnrollmentCRUDMenu {
         switch (choice) {
             case 1:
                 System.out.println("Create Enrollment");
+                createEnrollment();
                 break;
             case 2:
                 System.out.println("View All Enrollments");
@@ -45,5 +53,39 @@ public class EnrollmentCRUDMenu {
                 System.out.println("Invalid choice");
                 break;
         }
+    }
+
+    private void createEnrollment() {
+        scanner.nextLine();
+
+        System.out.print("Enter Student Name: ");
+        String studentName = scanner.nextLine();
+
+        System.out.print("Enter Course Name: ");
+        String courseName = scanner.nextLine();
+
+        System.out.print("Enter Completion Status (completed/in_progress/dropped): ");
+        String status = scanner.nextLine();
+
+        // Enrollment date = today
+        Date enrollmentDate = Date.valueOf(LocalDate.now());
+
+        Student student = new Student() {
+            @Override
+            public boolean isFullTime(CollectionManager collectionManager) {
+                return false;
+            }
+        };
+        student.setNames(studentName);
+
+        Course course = new Course();
+        course.setCourseName(courseName);
+
+        EnrollmentImplementation enrollment = new EnrollmentImplementation(
+                connection, student, course, enrollmentDate, status, 0.0
+        );
+
+        String result = enrollment.create();
+        System.out.println(result != null ? result : "Something went wrong while creating enrollment.");
     }
 }

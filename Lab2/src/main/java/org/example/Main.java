@@ -39,11 +39,11 @@ public class Main {
             EnrollmentImplementation enrollment = new EnrollmentImplementation(connection,student,course,Date.valueOf(LocalDate.now()),"On going",74);
             enrollment.viewAll();
 
-            System.out.println("\n");
-            CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
-            courseInstructor.viewAll();
-
-            connection.close();
+//            System.out.println("\n");
+//            CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
+//            courseInstructor.viewAll();
+//
+//            connection.close();
 
         } else  {
             System.out.println("Database connection could not be established");
