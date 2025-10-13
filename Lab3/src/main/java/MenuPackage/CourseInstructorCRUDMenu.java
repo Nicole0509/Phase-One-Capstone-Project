@@ -37,12 +37,14 @@ public class CourseInstructorCRUDMenu {
                 break;
             case 2:
                 System.out.println("View All Course Instructors");
+                viewAllCourseInstructors();
                 break;
             case 3:
                 System.out.println("Update Course Instructor");
                 break;
             case 4:
                 System.out.println("Delete CCourse Instructor");
+                deleteCourseInstructor();
                 break;
             case 0:
                 System.out.println("Back to Main Menu");
@@ -88,5 +90,20 @@ public class CourseInstructorCRUDMenu {
 
         String result = courseInstructor.create();
         System.out.println(result != null ? result : "Something went wrong while creating course instructor.");
+    }
+
+    private void viewAllCourseInstructors() {
+        CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection);
+        courseInstructor.viewAll();
+    }
+
+    private void deleteCourseInstructor() {
+        System.out.println("\n=== Delete Course Instructor ===");
+        System.out.print("Enter Course Instructor ID to delete: ");
+        int id = scanner.nextInt();
+
+        CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection);
+        String result = courseInstructor.delete(id);
+        System.out.println(result);
     }
 }
