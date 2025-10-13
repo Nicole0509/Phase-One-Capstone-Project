@@ -11,6 +11,7 @@ public class MainMenu {
     private final InstructorCRUDMenu instructorMenu;
     private final EnrollmentCRUDMenu enrollmentMenu;
     private final CourseInstructorCRUDMenu courseInstructorMenu;
+    private final StudentManagementQueries studentManagementQueries;
 
     Scanner scanner = new Scanner(System.in);
 
@@ -22,6 +23,7 @@ public class MainMenu {
         this.instructorMenu = new InstructorCRUDMenu(connection);
         this.enrollmentMenu = new EnrollmentCRUDMenu(connection);
         this.courseInstructorMenu = new CourseInstructorCRUDMenu(connection);
+        this.studentManagementQueries = new StudentManagementQueries(connection);
     }
 
 
@@ -42,6 +44,7 @@ public class MainMenu {
         System.out.println("3. Manage Instructors");
         System.out.println("4. Manage Enrollments");
         System.out.println("5. Assign Course Instructors");
+        System.out.println("6. View DB Queries");
         System.out.println("0. Exit\n");
 
         System.out.print("Enter your choice: ");
@@ -73,6 +76,11 @@ public class MainMenu {
             case 5:
                 System.out.println("Assign Course Instructors");
                 courseInstructorMenu.switchCourseInstructorMenuOptions(courseInstructorMenu.courseInstructorMenu());
+
+                break;
+            case 6:
+                System.out.println("Database Queries");
+                studentManagementQueries.switchManagementMenuOptions(studentManagementQueries.managementMenu());
 
                 break;
             case 0:
