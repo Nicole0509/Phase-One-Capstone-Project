@@ -39,6 +39,7 @@ public class EnrollmentCRUDMenu {
                 break;
             case 2:
                 System.out.println("View All Enrollments");
+                viewAllEnrollments();
                 break;
             case 3:
                 System.out.println("Update Enrollment");
@@ -64,7 +65,7 @@ public class EnrollmentCRUDMenu {
         System.out.print("Enter Course Name: ");
         String courseName = scanner.nextLine();
 
-        System.out.print("Enter Completion Status (completed/in_progress/dropped): ");
+        System.out.print("Enter Completion Status (Completed/On going/Dropped out): ");
         String status = scanner.nextLine();
 
         // Enrollment date = today
@@ -87,5 +88,10 @@ public class EnrollmentCRUDMenu {
 
         String result = enrollment.create();
         System.out.println(result != null ? result : "Something went wrong while creating enrollment.");
+    }
+
+    private void viewAllEnrollments() {
+        EnrollmentImplementation enrollment = new EnrollmentImplementation(connection);
+        enrollment.viewAll();
     }
 }
