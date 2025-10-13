@@ -41,6 +41,7 @@ public class CourseCRUDMenu {
                 break;
             case 3:
                 System.out.println("Update Course");
+                updateCourse();
                 break;
             case 4:
                 System.out.println("Delete Course");
@@ -73,6 +74,25 @@ public class CourseCRUDMenu {
 
         CourseImplementation course = new CourseImplementation(connection, name, description, credits);
         String result = course.create();
+        System.out.println(result);
+    }
+
+    private void updateCourse() {
+        System.out.print("Enter course ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter new course name (leave blank to keep same): ");
+        String newName = scanner.nextLine();
+
+        System.out.print("Enter new description (leave blank to keep same): ");
+        String newDescription = scanner.nextLine();
+
+        System.out.print("Enter new credits (leave blank to keep same): ");
+        String creditInput = scanner.nextLine();
+        Integer newCredits = creditInput.isBlank() ? null : Integer.parseInt(creditInput);
+
+        String result = courseImplementation.update(id, newName, newDescription, newCredits);
         System.out.println(result);
     }
 
