@@ -41,6 +41,7 @@ public class CourseInstructorCRUDMenu {
                 break;
             case 3:
                 System.out.println("Update Course Instructor");
+                updateCourseInstructor();5
                 break;
             case 4:
                 System.out.println("Delete CCourse Instructor");
@@ -95,6 +96,36 @@ public class CourseInstructorCRUDMenu {
     private void viewAllCourseInstructors() {
         CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection);
         courseInstructor.viewAll();
+    }
+
+    private void updateCourseInstructor() {
+        System.out.print("Enter Course Instructor ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter new Instructor ID (or 0 to keep current): ");
+        int instructorId = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter new Course ID (or 0 to keep current): ");
+        int courseId = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter new Term (or 0 to keep current): ");
+        int term = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.print("Enter new Start Date (yyyy-mm-dd) (or leave blank to keep current): ");
+        String startDateStr = scanner.nextLine();
+        Date startDate = startDateStr.isBlank() ? null : Date.valueOf(startDateStr);
+
+        System.out.print("Enter new End Date (yyyy-mm-dd) (or leave blank to keep current): ");
+        String endDateStr = scanner.nextLine();
+        Date endDate = endDateStr.isBlank() ? null : Date.valueOf(endDateStr);
+
+        CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection);
+        String result = courseInstructor.update(id, instructorId, courseId, term, startDate, endDate);
+        System.out.println(result);
     }
 
     private void deleteCourseInstructor() {
