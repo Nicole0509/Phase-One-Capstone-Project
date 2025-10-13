@@ -145,66 +145,93 @@ public class EnrollmentImplementation extends Enrollment implements CrudInterfac
         }
     }
 
-    @Override
     public String update(int id){
 
-        // Variables that will be used to get user in put
-        int newStudentId = 3;
-        int newCourseId = 1;
-        Date newEnrollmentDate = null;
-        String newCompletionStatus = null;
-
-        // Check if a particular exists
+        // Check if the enrollment exists
         String selectQuery = "SELECT * FROM enrollments WHERE id = ?";
+        int previousStudentId = -1;
+        int previousCourseId = -1;
+        Date previousEnrollmentDate = null;
+        String previousCompletionStatus = null;
 
-        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
-
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
             selectStatement.setInt(1, id);
             ResultSet resultSet = selectStatement.executeQuery();
 
             if (!resultSet.next()) {
-                return "No enrollments found with ID " + id;
+                return "No enrollment found with ID " + id;
             }
 
-            //Setting new update values
-            setEnrollmentDate(newEnrollmentDate);
-            setCompletionStatus(newCompletionStatus);
+            // Get existing DB values
+            previousStudentId = resultSet.getInt("student_id");
+            previousCourseId = resultSet.getInt("course_id");
+            previousEnrollmentDate = resultSet.getDate("enrollment_date");
+            previousCompletionStatus = resultSet.getString("completion_status");
 
-            //Getting values from the DB
-            Date previousEnrollmentDate = resultSet.getDate("enrollment_date");
-            String previousCompletionStatus = resultSet.getString("completion_status");
-
-            //Setting new update values
-            newEnrollmentDate = (getEnrollmentDate() != null) ? getEnrollmentDate() : previousEnrollmentDate;
-            newCompletionStatus = (getCompletionStatus() != null) ? getCompletionStatus() : previousCompletionStatus;
-
-        } catch (Exception e){
+        } catch (SQLException e) {
             return e.getMessage();
         }
 
-        // Update an existing record in enrollment
-        query = """
-                UPDATE enrollments SET 
-                    student_id = ?,
-                    course_id = ?,
-                    enrollment_date = ?,
-                    completion_status = ?::completionstatus
-                WHERE id = ?
-                """;
+        // Decide which values to update
+        int newStudentId = (getStudent() != null && getStudent().getNames() != null) ? fetchStudentId(getStudent().getNames()) : previousStudentId;
+        int newCourseId = (getCourse() != null && getCourse().getCourseName() != null) ? fetchCourseId(getCourse().getCourseName()) : previousCourseId;
+        Date newEnrollmentDate = (getEnrollmentDate() != null) ? getEnrollmentDate() : previousEnrollmentDate;
+        String newCompletionStatus = (getCompletionStatus() != null) ? getCompletionStatus() : previousCompletionStatus;
 
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
+        // Update enrollment record
+        String updateQuery = """
+            UPDATE enrollments SET
+                student_id = ?,
+                course_id = ?,
+                enrollment_date = ?,
+                completion_status = ?::completionstatus
+            WHERE id = ?
+            """;
+
+        try (PreparedStatement statement = connection.prepareStatement(updateQuery)) {
             statement.setInt(1, newStudentId);
             statement.setInt(2, newCourseId);
             statement.setDate(3, new java.sql.Date(newEnrollmentDate.getTime()));
             statement.setString(4, newCompletionStatus);
             statement.setInt(5, id);
-            statement.executeUpdate();
 
+            statement.executeUpdate();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return "Enrollment with id: " + id + " was updated successfully!";
+
+        return "Enrollment with ID " + id + " updated successfully!";
     }
+
+    // Helper methods to fetch IDs dynamically
+    private int fetchStudentId(String studentName) {
+        int id = -1;
+        String query = "SELECT id FROM students WHERE names = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, studentName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) id = rs.getInt("id");
+            rs.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return id;
+    }
+
+    private int fetchCourseId(String courseName) {
+        int id = -1;
+        String query = "SELECT id FROM courses WHERE name = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setString(1, courseName);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) id = rs.getInt("id");
+            rs.close();
+        } catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        return id;
+    }
+
 
     @Override
     public String delete(int id){

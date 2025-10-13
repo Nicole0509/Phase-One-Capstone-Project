@@ -138,20 +138,17 @@ public class InstructorImplementation extends Instructor implements CrudInterfac
         }
     }
 
+        public String update(int id) {
+        // Variables to store new values
+        String newNames = getNames();
+        String newEmail = getEmail();
+        String newPhone = getPhoneNumber();
+        String newPosition = getPosition();
 
-    @Override
-    public String update(int id){
-
-        // Variables that will be used to get user in put
-        String newNames = null;
-        String newEmail = null;
-        String newPhone = null;
-        String newPosition = null;
-
-        // Check if a particular exists
+        // Check if instructor exists
         String selectQuery = "SELECT * FROM instructors WHERE id = ?";
 
-        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
 
             selectStatement.setInt(1, id);
             ResultSet resultSet = selectStatement.executeQuery();
@@ -160,52 +157,50 @@ public class InstructorImplementation extends Instructor implements CrudInterfac
                 return "No Instructor found with ID " + id;
             }
 
-            //Setting new update values
-            setNames(newNames);
-            setEmail(newEmail);
-            setPhoneNumber(newPhone);
-            setPosition(newPosition);
-
-            //Getting values from the DB
+            // Retrieve existing values from DB
             String previousNames = resultSet.getString("names");
             String previousEmail = resultSet.getString("email");
             String previousPhone = resultSet.getString("phone_number");
             String previousPosition = resultSet.getString("position");
 
-            //Setting new update values
-            newNames = (getNames() != null) ? getNames() : previousNames;
-            newEmail = (getEmail() != null) ? getEmail() : previousEmail;
-            newPhone = (getPhoneNumber() != null) ? getPhoneNumber() : previousPhone;
-            newPosition = (getPosition() != null) ? getPosition() : previousPosition;
+            // Use new values if provided, otherwise keep old ones
+            newNames = (newNames != null && !newNames.isBlank()) ? newNames : previousNames;
+            newEmail = (newEmail != null && !newEmail.isBlank()) ? newEmail : previousEmail;
+            newPhone = (newPhone != null && !newPhone.isBlank()) ? newPhone : previousPhone;
+            newPosition = (newPosition != null && !newPosition.isBlank()) ? newPosition : previousPosition;
 
-        } catch (Exception e){
-            return e.getMessage();
+        } catch (SQLException e) {
+            return "Error fetching instructor: " + e.getMessage();
         }
 
-
-
-        // Update an existing record in Instructors
+        // Update the record
         query = """
-                UPDATE instructors SET 
-                    names = ?,
-                    email = ?,
-                    phone_number = ?,
-                    position = ?
-                WHERE id = ?
-                """;
+            UPDATE instructors SET
+                names = ?,
+                email = ?,
+                phone_number = ?,
+                position = ?
+            WHERE id = ?
+            """;
 
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
+        try (PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, newNames);
             statement.setString(2, newEmail);
             statement.setString(3, newPhone);
             statement.setString(4, newPosition);
             statement.setInt(5, id);
-            statement.executeUpdate();
+
+            int rows = statement.executeUpdate();
+
+            if (rows > 0) {
+                return "Instructor with ID " + id + " was updated successfully!";
+            } else {
+                return "No update occurred for Instructor with ID " + id;
+            }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return "Error updating instructor: " + e.getMessage();
         }
-        return "Instructor with id: " + id + " was updated successfully!";
     }
 
 

@@ -146,7 +146,7 @@ public class StudentImplementation extends Student implements CrudInterface {
         }
     }
 
-   
+
     public String update(int id, String newNames, String newEmail, String newPhone, Date newDob, String newAddress) {
         // Check if student exists
         String selectQuery = "SELECT * FROM students WHERE id = ?";
