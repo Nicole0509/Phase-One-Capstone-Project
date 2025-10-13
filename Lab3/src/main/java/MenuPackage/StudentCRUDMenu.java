@@ -43,6 +43,7 @@ public class StudentCRUDMenu {
                 break;
             case 3:
                 System.out.println("\nUpdate Student");
+                updateStudent();
                 break;
             case 4:
                 System.out.println("\nDelete Student");
@@ -81,6 +82,33 @@ public class StudentCRUDMenu {
         StudentImplementation student = new StudentImplementation(connection, name, email, phone, dateOfBirth, address);
         student.create();
     }
+
+    private void updateStudent() {
+        System.out.print("Enter Student ID to update: ");
+        int id = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        System.out.print("Enter new Name (leave blank to keep current): ");
+        String newName = scanner.nextLine();
+
+        System.out.print("Enter new Email (leave blank to keep current): ");
+        String newEmail = scanner.nextLine();
+
+        System.out.print("Enter new Phone Number (leave blank to keep current): ");
+        String newPhone = scanner.nextLine();
+
+        System.out.print("Enter new Address (leave blank to keep current): ");
+        String newAddress = scanner.nextLine();
+
+        System.out.print("Enter new Date of Birth (yyyy-mm-dd) (leave blank to keep current): ");
+        String dobStr = scanner.nextLine();
+        Date newDob = dobStr.isBlank() ? null : Date.valueOf(dobStr);
+
+        // Call the update method in implementation class
+        String result = studentImplementation.update(id, newName, newEmail, newPhone, newDob, newAddress);
+        System.out.println(result);
+    }
+
 
     private void deleteStudent() {
 
