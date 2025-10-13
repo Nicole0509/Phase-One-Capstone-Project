@@ -146,21 +146,11 @@ public class StudentImplementation extends Student implements CrudInterface {
         }
     }
 
-    @Override
-    public String update(int id){
-
-        // Variables that will be used to get user in put
-        String newNames = null;
-        String newEmail = "angela@gmail.com";
-        String newPhone = null;
-        Date newDob = null;
-        String newAddress = null;
-
-        // Check if a particular exists
+   
+    public String update(int id, String newNames, String newEmail, String newPhone, Date newDob, String newAddress) {
+        // Check if student exists
         String selectQuery = "SELECT * FROM students WHERE id = ?";
-
-        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
-
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
             selectStatement.setInt(1, id);
             ResultSet resultSet = selectStatement.executeQuery();
 
@@ -168,34 +158,22 @@ public class StudentImplementation extends Student implements CrudInterface {
                 return "No student found with ID " + id;
             }
 
-            //Setting new update values
-            setNames(newNames);
-            setEmail(newEmail);
-            setPhoneNumber(newPhone);
-            setDateOfBirth(newDob);
-            setAddress(newAddress);
-
-            //Getting values from the DB
+            // Fetch previous values
             String previousNames = resultSet.getString("names");
             String previousEmail = resultSet.getString("email");
             String previousPhone = resultSet.getString("phone_number");
             Date previousDob = resultSet.getDate("date_of_birth");
             String previousAddress = resultSet.getString("address");
 
-            //Setting new update values
-            newNames = (getNames() != null) ? getNames() : previousNames;
-            newEmail = (getEmail() != null) ? getEmail() : previousEmail;
-            newPhone = (getPhoneNumber() != null) ? getPhoneNumber() : previousPhone;
-            newDob = (getDateOfBirth() != null) ? getDateOfBirth() : previousDob;
-            newAddress = (getAddress() != null) ? getAddress() : previousAddress;
+            // If new values are null or blank, keep old values
+            String finalNames = (newNames != null && !newNames.isBlank()) ? newNames : previousNames;
+            String finalEmail = (newEmail != null && !newEmail.isBlank()) ? newEmail : previousEmail;
+            String finalPhone = (newPhone != null && !newPhone.isBlank()) ? newPhone : previousPhone;
+            Date finalDob = (newDob != null) ? newDob : previousDob;
+            String finalAddress = (newAddress != null && !newAddress.isBlank()) ? newAddress : previousAddress;
 
-        } catch (Exception e){
-            return e.getMessage();
-        }
-
-        // Update an existing record in students
-        System.out.println("Update student");
-        query = """
+            // Update query
+            String query = """
                 UPDATE students SET 
                     names = ?,
                     email = ?,
@@ -205,20 +183,26 @@ public class StudentImplementation extends Student implements CrudInterface {
                 WHERE id = ?
                 """;
 
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, newNames);
-            statement.setString(2, newEmail);
-            statement.setString(3, newPhone);
-            statement.setDate(4, new java.sql.Date(newDob.getTime()));
-            statement.setString(5, newAddress);
-            statement.setInt(6, id);
-            statement.executeUpdate();
+            try (PreparedStatement statement = connection.prepareStatement(query)) {
+                statement.setString(1, finalNames);
+                statement.setString(2, finalEmail);
+                statement.setString(3, finalPhone);
+                statement.setDate(4, new java.sql.Date(finalDob.getTime()));
+                statement.setString(5, finalAddress);
+                statement.setInt(6, id);
+
+                int rows = statement.executeUpdate();
+                return rows > 0 ? "Student with ID " + id + " updated successfully!" : "Update failed.";
+
+            }
 
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return "SQL Error: " + e.getMessage();
+        } catch (Exception e) {
+            return "Error: " + e.getMessage();
         }
-        return "Student with id: " + id + " was updated successfully!";
     }
+
 
     @Override
     public String delete(int id){
