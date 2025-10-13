@@ -1,6 +1,11 @@
 package MenuPackage;
 
+import CRUD_Implemantation.CourseInstructorImplementation;
+import models.Course;
+import models.Instructor;
+
 import java.sql.Connection;
+import java.sql.Date;
 import java.util.Scanner;
 
 public class CourseInstructorCRUDMenu {
@@ -28,6 +33,7 @@ public class CourseInstructorCRUDMenu {
         switch (choice) {
             case 1:
                 System.out.println("Create Course Instructor");
+                createCourseInstructor();
                 break;
             case 2:
                 System.out.println("View All Course Instructors");
@@ -45,5 +51,42 @@ public class CourseInstructorCRUDMenu {
                 System.out.println("Invalid choice");
                 break;
         }
+    }
+
+    private void createCourseInstructor() {
+        scanner.nextLine();
+
+        System.out.print("Enter Course Name: ");
+        String courseName = scanner.nextLine();
+
+        System.out.print("Enter Instructor Name: ");
+        String instructorName = scanner.nextLine();
+
+        System.out.print("Enter Term/Semester (number): ");
+        int term = scanner.nextInt();
+        scanner.nextLine(); // clear buffer
+
+        System.out.print("Enter Start Date (yyyy-mm-dd): ");
+        String startDateStr = scanner.nextLine();
+
+        System.out.print("Enter End Date (yyyy-mm-dd): ");
+        String endDateStr = scanner.nextLine();
+
+        // Map to model objects
+        Course course = new Course();
+        course.setCourseName(courseName);
+
+        Instructor instructor = new Instructor();
+        instructor.setNames(instructorName);
+
+        Date startDate = Date.valueOf(startDateStr);
+        Date endDate = Date.valueOf(endDateStr);
+
+        CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(
+                connection, course, instructor, term, startDate, endDate
+        );
+
+        String result = courseInstructor.create();
+        System.out.println(result != null ? result : "Something went wrong while creating course instructor.");
     }
 }
