@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class StudentImplementation extends Student implements CrudInterface {
     private final Connection connection;
@@ -228,4 +230,51 @@ public class StudentImplementation extends Student implements CrudInterface {
     public boolean isFullTime(CollectionManager collectionManager) {
         return true;
     }
+
+    // Inside StudentImplementation.java
+    public List<Student> getAllStudents() {
+        List<Student> students = new ArrayList<>();
+        String query = "SELECT * FROM students";
+
+        try (PreparedStatement statement = connection.prepareStatement(query);
+             ResultSet resultSet = statement.executeQuery()) {
+
+            while (resultSet.next()) {
+                Student student = new Student() {
+                    @Override
+                    public boolean isFullTime(CollectionManager collectionManager) {
+                        return false;
+                    }
+                };
+                student.setId(resultSet.getInt("id"));
+                student.setNames(resultSet.getString("name"));
+                student.setEmail(resultSet.getString("email"));
+                student.setPhoneNumber(resultSet.getString("phone"));
+                student.setDateOfBirth(resultSet.getDate("date_of_birth"));
+                student.setAddress(resultSet.getString("address"));
+                students.add(student);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return students;
+    }
+
+    public void createStudentFromObject(Student s) {
+        try {
+            String query = "INSERT INTO student (names, email, phone, date_of_birth, address) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, s.getNames());
+            ps.setString(2, s.getEmail());
+            ps.setString(3, s.getPhoneNumber());
+            ps.setDate(4, new java.sql.Date(s.getDateOfBirth().getTime()));
+            ps.setString(5, s.getAddress());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 }
