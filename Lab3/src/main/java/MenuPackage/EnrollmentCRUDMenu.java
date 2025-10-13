@@ -46,6 +46,7 @@ public class EnrollmentCRUDMenu {
                 break;
             case 4:
                 System.out.println("Delete Enrollment");
+                deleteEnrollment();
                 break;
             case 0:
                 System.out.println("Back to Main Menu");
@@ -94,4 +95,15 @@ public class EnrollmentCRUDMenu {
         EnrollmentImplementation enrollment = new EnrollmentImplementation(connection);
         enrollment.viewAll();
     }
+
+    private void deleteEnrollment() {
+        System.out.println("\n=== Delete Enrollment ===");
+        System.out.print("Enter Enrollment ID to delete: ");
+        int id = scanner.nextInt();
+
+        EnrollmentImplementation enrollment = new EnrollmentImplementation(connection);
+        String result = enrollment.delete(id);
+        System.out.println(result);
+    }
+
 }
