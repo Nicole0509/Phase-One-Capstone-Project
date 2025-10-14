@@ -33,11 +33,17 @@
                         <th class="py-2 px-4">ID</th>
                         <th class="py-2 px-4">Name</th>
                         <th class="py-2 px-4">Email</th>
+                        <th class="py-2 px-4">Phone</th>
+                        <th class="py-2 px-4">DOB</th>
+                        <th class="py-2 px-4">Address</th>
                         <th class="py-2 px-4">Actions</th>
                     </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="studentTable">
                     <tr class="odd:bg-white even:bg-gray-200">
+                        <td class="py-2 px-4">1</td>
+                        <td class="py-2 px-4">John Doe</td>
+                        <td class="py-2 px-4">john@example.com</td>
                         <td class="py-2 px-4">1</td>
                         <td class="py-2 px-4">John Doe</td>
                         <td class="py-2 px-4">john@example.com</td>
@@ -157,5 +163,23 @@
     </div>
 
     <script src="index.js"></script>
+    <script>
+        const apiURL = "http://localhost:63342/Lab3/src/main/webapp/index.html";
+        console.log(apiURL);
+
+        // Load students
+        async function loadStudents() {
+            console.log('Loading students...')
+            const res = await fetch(apiURL);
+            const data = await res.json();
+            const table = document.getElementById("studentTable");
+            table.innerHTML = "";
+
+            console.log("Table says" +table)
+
+        }
+
+        loadStudents()
+    </script>
 </body>
 </html>
