@@ -9,21 +9,17 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.List;
 import com.google.gson.Gson;
+import org.example.DBConnection;
 
 @WebServlet("/students")
 public class StudentServlet extends HttpServlet {
     private Connection connection;
-    private Gson gson = new Gson();
+    private final Gson gson = new Gson();
 
     @Override
     public void init() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(
-                    "jdbc:mysql://localhost:3306/your_database_name",
-                    "your_user",
-                    "your_password"
-            );
+            connection = DBConnection.getConnection();
         } catch (Exception e) {
             e.printStackTrace();
         }
