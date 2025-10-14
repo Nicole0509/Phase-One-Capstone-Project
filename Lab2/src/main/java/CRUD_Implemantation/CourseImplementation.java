@@ -13,6 +13,11 @@ public class CourseImplementation extends Course implements CrudInterface {
     private final Connection connection;
     String query;
 
+    public CourseImplementation(Connection connection) {
+        super();
+        this.connection = connection;
+    }
+
     public CourseImplementation(Connection connection,String courseName, String description, int credits) {
         super(courseName, description, credits);
         this.connection = connection;
@@ -92,65 +97,38 @@ public class CourseImplementation extends Course implements CrudInterface {
         }
     }
 
-    @Override
-    public String update(int id){
-
-        // Variables that will be used to get user in put
-        String newCourseNames = null;
-        String newDescription = null;
-        int newCredits = 0;
-
-        // Check if a particular course exists
+    public String update(int id, String newCourseName, String newDescription, Integer newCredits) {
+        // Check if course exists
         String selectQuery = "SELECT * FROM courses WHERE id = ?";
+        try (PreparedStatement selectStmt = connection.prepareStatement(selectQuery)) {
+            selectStmt.setInt(1, id);
+            ResultSet rs = selectStmt.executeQuery();
+            if (!rs.next()) return "No course found with ID " + id;
 
-        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
+            // Get current values
+            String oldName = rs.getString("name");
+            String oldDescription = rs.getString("description");
+            int oldCredits = rs.getInt("credits");
 
-            selectStatement.setInt(1, id);
-            ResultSet resultSet = selectStatement.executeQuery();
+            // Replace only fields that are provided
+            String updatedName = (newCourseName == null || newCourseName.isBlank()) ? oldName : newCourseName;
+            String updatedDescription = (newDescription == null || newDescription.isBlank()) ? oldDescription : newDescription;
+            int updatedCredits = (newCredits == null || newCredits <= 0) ? oldCredits : newCredits;
 
-            if (!resultSet.next()) {
-                return "No course found with ID " + id;
+            query = "UPDATE courses SET name = ?, description = ?, credits = ? WHERE id = ?";
+            try (PreparedStatement updateStmt = connection.prepareStatement(query)) {
+                updateStmt.setString(1, updatedName);
+                updateStmt.setString(2, updatedDescription);
+                updateStmt.setInt(3, updatedCredits);
+                updateStmt.setInt(4, id);
+                int rows = updateStmt.executeUpdate();
+                return rows > 0
+                        ? "Course with ID " + id + " updated successfully!"
+                        : "No changes were made.";
             }
-
-            //Setting new update values
-            setCourseName(newCourseNames);
-            setDescription(newDescription);
-            setCredits(newCredits);
-
-            //Getting values from the DB
-            String previousCourseName = resultSet.getString("name");
-            String previousDescription = resultSet.getString("description");
-            int previousCredits = resultSet.getInt("credits");
-
-            //Setting new update values
-            newCourseNames = (getCourseName() != null) ? getCourseName() : previousCourseName;
-            newDescription = (getDescription() != null) ? getDescription() : previousDescription;
-            newCredits = (previousCredits > 0) ? getCredits() : previousCredits;
-
-        } catch (Exception e){
-            return e.getMessage();
-        }
-
-        // Update an existing record in courses
-        query = """
-                UPDATE courses SET 
-                    name = ?,
-                    description = ?,
-                    credits = ?
-                WHERE id = ?
-                """;
-
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setString(1, newCourseNames);
-            statement.setString(2, newDescription);
-            statement.setInt(3, newCredits);
-            statement.setInt(4, id);
-            statement.executeUpdate();
-
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            return "Error updating course: " + e.getMessage();
         }
-        return "Course with id: " + id + " was updated successfully!";
     }
 
     @Override

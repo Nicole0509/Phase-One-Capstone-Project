@@ -3,11 +3,15 @@ package models;
 import java.util.Date;
 
 public class Enrollment {
-    private final Student student;
-    private final Course course;
+    private Student student;
+    private Course course;
     private Date enrollmentDate;
     private String completionStatus;
     private double grade;
+
+    public Enrollment() {
+        System.out.println();
+    }
 
     public Enrollment(Student student, Course course, Date enrollmentDate, String completionStatus, double grade) {
         this.student = student;

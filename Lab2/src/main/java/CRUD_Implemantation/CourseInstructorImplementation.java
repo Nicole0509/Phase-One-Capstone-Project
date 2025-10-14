@@ -15,6 +15,11 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
     private final Connection connection;
     String query;
 
+    public CourseInstructorImplementation(Connection connection) {
+        super();
+        this.connection = connection;
+    }
+
     public CourseInstructorImplementation(Connection connection,Course course, Instructor instructor, int term, Date startDate, Date endDate){
         super(course, instructor, term, startDate, endDate);
         this.connection = connection;
@@ -147,21 +152,11 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
         }
     }
 
-    @Override
-    public String update(int id){
-
-        // Variables that will be used to get user in put
-        int newInstructorId = 4;
-        int newCourseId = 1;
-        int newTerm = 1;
-        Date newStartDate = null;
-        Date newEndDate = null;
-
-        // Check if a particular exists
+    public String update(int id, int instructorId, int courseId, int term, Date startDate, Date endDate) {
+        // Check if the record exists
         String selectQuery = "SELECT * FROM course_instructor WHERE id = ?";
 
-        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)){
-
+        try (PreparedStatement selectStatement = connection.prepareStatement(selectQuery)) {
             selectStatement.setInt(1, id);
             ResultSet resultSet = selectStatement.executeQuery();
 
@@ -169,27 +164,21 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
                 return "No course instructor found with ID " + id;
             }
 
-            //Setting new update values
-            setTerm(newTerm);
-            setStartDate(newStartDate);
-            setEndDate(newEndDate);
+            // Keep old values if new values are "empty" (for term, dates, IDs, 0 means keep old)
+            int currentInstructorId = resultSet.getInt("instructor_id");
+            int currentCourseId = resultSet.getInt("course_id");
+            int currentTerm = resultSet.getInt("term");
+            Date currentStartDate = resultSet.getDate("start_date");
+            Date currentEndDate = resultSet.getDate("end_date");
 
-            //Getting values from the DB
-            int previousTerm = resultSet.getInt("term");
-            Date previousStartDate = resultSet.getDate("start_date");
-            Date previousEndDate = resultSet.getDate("end_date");
+            int finalInstructorId = instructorId > 0 ? instructorId : currentInstructorId;
+            int finalCourseId = courseId > 0 ? courseId : currentCourseId;
+            int finalTerm = term > 0 ? term : currentTerm;
+            Date finalStartDate = startDate != null ? startDate : currentStartDate;
+            Date finalEndDate = endDate != null ? endDate : currentEndDate;
 
-            //Setting new update values
-            newTerm = (getTerm() < 0) ? getTerm() : previousTerm;
-            newStartDate = (getStartDate() != null) ? getStartDate() : previousStartDate;
-            newEndDate = (getEndDate() != null) ? getEndDate() : previousEndDate;
-
-        } catch (Exception e){
-            return e.getMessage();
-        }
-
-        // Update an existing record in enrollment
-        query = """
+            // Update record
+            String updateQuery = """
                 UPDATE course_instructor SET 
                     instructor_id = ?,
                     course_id = ?,
@@ -199,20 +188,23 @@ public class CourseInstructorImplementation extends CourseInstructor implements 
                 WHERE id = ?
                 """;
 
-        try(PreparedStatement statement = connection.prepareStatement(query)) {
-            statement.setInt(1, newInstructorId);
-            statement.setInt(2, newCourseId);
-            statement.setInt(3, getTerm());
-            statement.setDate(4, new java.sql.Date(newStartDate.getTime()));
-            statement.setDate(5, new java.sql.Date(newEndDate.getTime()));
-            statement.setInt(6, id);
-            statement.executeUpdate();
+            try (PreparedStatement updateStatement = connection.prepareStatement(updateQuery)) {
+                updateStatement.setInt(1, finalInstructorId);
+                updateStatement.setInt(2, finalCourseId);
+                updateStatement.setInt(3, finalTerm);
+                updateStatement.setDate(4, new java.sql.Date(finalStartDate.getTime()));
+                updateStatement.setDate(5, new java.sql.Date(finalEndDate.getTime()));
+                updateStatement.setInt(6, id);
 
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+                int rows = updateStatement.executeUpdate();
+                return rows > 0 ? "Course Instructor updated successfully!" : "Update failed!";
+            }
+
+        } catch (Exception e) {
+            return e.getMessage();
         }
-        return "Enrollment with id: " + id + " was updated successfully!";
     }
+
 
     @Override
     public String delete(int id){

@@ -12,13 +12,9 @@ import java.time.LocalDate;
 
 public class Main {
 
-    private static final String URL = System.getenv("DB_URL");
-    private static final String USERNAME = System.getenv("DB_USERNAME");
-    private static final String PASSWORD = System.getenv("DB_PASSWORD");
-
     static void main(String[] args) throws SQLException {
 
-        Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        Connection connection = DBConnection.getConnection();
 
         if (connection != null) {
 //            Database connection established
@@ -39,11 +35,11 @@ public class Main {
             EnrollmentImplementation enrollment = new EnrollmentImplementation(connection,student,course,Date.valueOf(LocalDate.now()),"On going",74);
             enrollment.viewAll();
 
-            System.out.println("\n");
-            CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
-            courseInstructor.viewAll();
-
-            connection.close();
+//            System.out.println("\n");
+//            CourseInstructorImplementation courseInstructor = new CourseInstructorImplementation(connection,course,instructor,1,Date.valueOf(LocalDate.now()),Date.valueOf(LocalDate.now()));
+//            courseInstructor.viewAll();
+//
+//            connection.close();
 
         } else  {
             System.out.println("Database connection could not be established");

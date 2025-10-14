@@ -5,6 +5,9 @@ public class Course {
     private String description;
     private int credits;
 
+    public Course() {
+        System.out.println();
+    }
     public Course(String courseName, String description, int credits) {
         this.setCourseName(courseName);
         this.setDescription(description);

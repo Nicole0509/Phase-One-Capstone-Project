@@ -1,9 +1,14 @@
 package SuperPackage;
 
 public class Person {
+    private int id;
     private String names;
     private String email;
     private String phoneNumber;
+
+    public Person() {
+        System.out.println();
+    }
 
     public Person(String names, String email, String phoneNumber) {
         this.names = names;
@@ -33,5 +38,13 @@ public class Person {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

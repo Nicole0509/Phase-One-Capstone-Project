@@ -5,6 +5,9 @@ import SuperPackage.Person;
 public class Instructor extends Person {
     private String position;
 
+    public Instructor() {
+        super();
+    }
     public Instructor(String names, String email, String phoneNumber, String position) {
         super(names, email, phoneNumber);
         this.setPosition(position);
