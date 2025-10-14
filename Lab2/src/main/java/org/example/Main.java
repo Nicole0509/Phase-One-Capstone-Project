@@ -12,13 +12,9 @@ import java.time.LocalDate;
 
 public class Main {
 
-    private static final String URL = System.getenv("DB_URL");
-    private static final String USERNAME = System.getenv("DB_USERNAME");
-    private static final String PASSWORD = System.getenv("DB_PASSWORD");
-
     static void main(String[] args) throws SQLException {
 
-        Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        Connection connection = DBConnection.getConnection();
 
         if (connection != null) {
 //            Database connection established

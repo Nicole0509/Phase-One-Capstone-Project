@@ -76,7 +76,7 @@ public class StudentServlet extends HttpServlet {
         response.setContentType("application/json");
         response.getWriter().write("{\"message\":\"" + result + "\"}");
     }
-    
+
     // Delete student by id
     @Override
     protected void doDelete(HttpServletRequest request, HttpServletResponse response)
